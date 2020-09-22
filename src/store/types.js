@@ -1,2 +1,2 @@
 const GETDATA = 'GETDATA';
-const LIKEWORK = 'LIKEWORK';
+// const LIKEWORK = 'LIKEWORK';

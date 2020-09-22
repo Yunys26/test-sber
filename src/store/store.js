@@ -1,14 +1,18 @@
-import { createStore } from 'redux';
+// Хранилище
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import mainReducer from '../features/mainSlice/mainSlice';
 
-function data (state = 0, action) {
-    switch (action.type) {
-        case GETDATA:
-            return state + 1;
-        case LIKEWORK:
-            return state - 1;
-    }
-}
+const middleware = getDefaultMiddleware({
+    // immutableCheck: false,
+    // serializableCheck: false,
+    thunk: true,
+});
 
-let store = createStore(data);
+export default configureStore({
+    // reducer: { ...reducers }
+    reducer: {
+        data: mainReducer,
+    },
 
-store.subscribe( () => console.log(store.getState()))
+    middleware,
+})
