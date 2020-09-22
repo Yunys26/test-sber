@@ -1,0 +1,2 @@
+const GETDATA = 'GETDATA';
+const LIKEWORK = 'LIKEWORK';
