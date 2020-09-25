@@ -1,18 +1,17 @@
-// Хранилище
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import mainReducer from '../features/mainSlice/mainSlice';
+import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
+import mainSlice from '../features/mainSlice/mainSlice';
+
+const rootReducer = combineReducers({
+    main: mainSlice,
+});
 
 const middleware = getDefaultMiddleware({
-    // immutableCheck: false,
-    // serializableCheck: false,
+    immutableCheck: false,
+    serializableCheck: false,
     thunk: true,
 });
 
-export default configureStore({
-    // reducer: { ...reducers }
-    reducer: {
-        data: mainReducer,
-    },
-
+export const store = configureStore({
+    reducer: rootReducer,
     middleware,
-})
+});

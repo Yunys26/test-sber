@@ -1,29 +1,28 @@
-import React from 'react';
+import axios from "axios";
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-export const mainSlice = createSlice({
-    name: 'Main',
+const mainSlice = createSlice({
+    name: 'mainS',
+
     initialState: {
-        data: null,
+        data: 1,
     },
+
     reducers: {
-        getData: (state, action) => {
-            axios.get(`https://jobs.github.com/positions.json?search=${action.payload}`)
-                .then(res => console.log(JSON.parse(res)))
-                .catch(err => console.log(err))
-        },
-        // showData: () => {
-        //     return <p>123</p>
-        // }
-
-    },
+        async getData (state, action)  {
+            await axios.get('http://localhost:9999/', {
+                params: {
+                    input: action.payload,
+                }
+            })
+            .then(res => {
+                console.log(res);
+                console.log(res.data.length);
+                state.data = res.data
+            })
+            .catch(err => console.log(err))
+        }
+    }
 });
-
-export const { getData, showData } = mainSlice.actions;
-
-// export const dataGet = dataWork => dispatch => {
-//     dispatch(data(dataWork));
-// }
-
 export default mainSlice.reducer;
+export const { getData } = mainSlice.actions;
