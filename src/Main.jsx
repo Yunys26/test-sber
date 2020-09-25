@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     Box,
     Button,
@@ -11,7 +11,7 @@ import {
     createMuiTheme,
     CssBaseline
 } from '@material-ui/core';
-import { getData } from './features/mainSlice/mainSlice';
+import { clickIncrement, getData, responseDataWork } from './features/mainSlice/mainSlice';
 
 const themeSearchBlock = createMuiTheme({
     overrides: {
@@ -53,16 +53,15 @@ const useStyles = makeStyles({
 })
 
 function Main(props) {
-
-    const regexInput = '\\([\d])\\';
-
-    const data = useSelector(state => state.main.data);
+    // Hooks
+    const data = useSelector( state => state.main.dataResponse );
 
     const dispatch = useDispatch();
 
     const classes = useStyles();
 
-    const [inputValue, setInputValue] = React.useState('');
+    const [inputValue, setInputValue] = useState('');
+
     return (
         <Box className={classes.mainBlock} boxShadow={4}>
             <Typography
@@ -85,7 +84,7 @@ function Main(props) {
                         className=""
                         color="secondary"
                         autoFocus={true}
-                        defaultValue={inputValue}
+                        value={inputValue}
                         onChange={e => setInputValue(e.target.value)}
                         placeholder="Enter"
                     // placeholder="Enter programming language"
@@ -93,15 +92,21 @@ function Main(props) {
                 </ThemeProvider>
                 <Button
                     className={classes.serachButton}
-                    onClick={() => (inputValue === '') ? alert("Вы ничего не ввели") : dispatch(getData(inputValue))}
-                    variant="outlined" color="secondary"
+                    // onClick={() => (inputValue === '') ? alert("Вы ничего не ввели") : dispatch(getData(inputValue))}
+                    onClick={ () => {
+                        dispatch(responseDataWork(inputValue));
+                        setInputValue('');
+                    }}
+                    variant="outlined" 
+                    color="secondary"
                 >
                     Search Work
                 </Button>
-                {/* {dispatch(displayTable())} */}
             </Grid>
-            {data}
+            {/* {data.map( (el, i) => <p>{el.id}</p> )} */}
+            {console.log(data)}
         </Box>
     )
 }
-export default connect(null, { Main })(Main);
+
+export default Main;
