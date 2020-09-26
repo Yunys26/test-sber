@@ -1,3 +1,4 @@
+// Libs
 import axios from "axios";
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
@@ -10,13 +11,14 @@ export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWor
             }
         })
         .then(res => {
+            console.log(res.data);
             return res;
         })
         .catch(err => console.log(err))
         return response.data;
     }
 );
-
+// Создане ветви хранилища
 const mainSlice = createSlice({
     // Название слоя
     name: 'mainSliceBlock',
@@ -31,11 +33,12 @@ const mainSlice = createSlice({
     // Обновление внешних экшенов
     extraReducers: {
         [responseDataWork.fulfilled]: (state, aciton) => {
-            state.dataResponse.push(aciton.payload);
+            state.dataResponse = aciton.payload;
         }
     },
 });
 
 
 export default mainSlice.reducer;
+
 export const { getData, clickIncrement} = mainSlice.actions;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// Libs
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Box,
@@ -9,10 +10,14 @@ import {
     ThemeProvider,
     makeStyles,
     createMuiTheme,
-    CssBaseline
+    CssBaseline, 
+    IconButton
 } from '@material-ui/core';
-import { clickIncrement, getData, responseDataWork } from './features/mainSlice/mainSlice';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+// MainSLice
+import { responseDataWork } from './store/slicesStore/mainSlice';
 
+// Изменение элементов глобально, обращение к корневым стилям
 const themeSearchBlock = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
@@ -28,6 +33,7 @@ const themeSearchBlock = createMuiTheme({
     }
 });
 
+// Созданный стиль для компоненты
 const useStyles = makeStyles({
     mainBlock: {
         padding: '100px',
@@ -37,6 +43,7 @@ const useStyles = makeStyles({
     },
     searchBlock: {
         marginTop: '4rem',
+        marginBottom: '4rem'
     },
     serachButton: {
         marginLeft: '4rem',
@@ -62,13 +69,25 @@ function Main(props) {
 
     const [inputValue, setInputValue] = useState('');
 
+    const [favoritWork, setfavoritWork] = useState([]);
+    
+    const addInFavorite = (index) => {
+        localStorage.setItem(index, JSON.stringify(data[index]));
+        
+        // let a = JSON.stringify(data[index]);
+
+        // console.log(JSON.parse(a))
+        // localStorage.setItem(index, data[index]);
+        alert('Добавлено в избранное');
+    };
+
     return (
         <Box className={classes.mainBlock} boxShadow={4}>
             <Typography
                 variant="h2"
                 align="center"
             >
-                WorkInSearch
+            WorkInSearch
             </Typography>
             <Grid
                 className={classes.searchBlock}
@@ -92,19 +111,54 @@ function Main(props) {
                 </ThemeProvider>
                 <Button
                     className={classes.serachButton}
-                    // onClick={() => (inputValue === '') ? alert("Вы ничего не ввели") : dispatch(getData(inputValue))}
-                    onClick={ () => {
-                        dispatch(responseDataWork(inputValue));
-                        setInputValue('');
-                    }}
+                    onClick={ 
+                        () => (inputValue === '') ? 
+                            alert("Вы ничего не ввели") 
+                            : 
+                            (() => {
+                                dispatch(responseDataWork(inputValue));
+                                setInputValue('');
+                            })()
+                        // аналог
+                        // () => {
+                        //     if (inputValue === '') {
+                        //         alert("Вы ничего не ввели");
+                        //     } else {
+                        //         dispatch(responseDataWork(inputValue));
+                        //         setInputValue('');
+                        //     }
+                        // }
+                    }
                     variant="outlined" 
                     color="secondary"
                 >
-                    Search Work
+                Search Work
                 </Button>
             </Grid>
-            {/* {data.map( (el, i) => <p>{el.id}</p> )} */}
-            {console.log(data)}
+            <Grid>
+            {data.map( (el, index) => 
+                <Box boxShadow={4} id={index}>
+                    {el.company}<br/>
+                    <img src={el.company_logo}></img><br/> 
+                    {el.company_url}<br/>
+                    {el.created_at}<br/>
+                    {el.description}<br/>
+                    {el.how_to_apply}<br/>
+                    {el.location}<br/>
+                    {el.title}<br/>
+                    {el.type}
+                    <IconButton onClick={() => addInFavorite(index)} >
+                        <FavoriteBorderIcon />
+                    </IconButton>
+                </Box>)}
+            </Grid>
+            {console.log(localStorage.key(1))}
+            {/* {console.log(localStorage.getItem(localStorage.key(0)))} */}
+            {/* {(localStorage.length === 0) ? null : ( () => {
+                for (let x = 0; x < localStorage.length - 1; x++) {
+                    return [JSON.parse(localStorage.getItem(localStorage.key(x)))].map( (el) => <p>{el.id}</p>)
+                }
+            })()} */}
         </Box>
     )
 }

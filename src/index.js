@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+// Libs
 import { Provider } from 'react-redux';
-import Main from './Main';
+// Store
 import { store } from './store/store';
-
+// Components
+import Main from './Main';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* Подключение хранилища */}
     <Provider store={store}>
-      <Main />
-      {/* <App/> */}
+      <Main/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
