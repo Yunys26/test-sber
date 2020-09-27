@@ -193,11 +193,11 @@ function Main(props) {
                                 <FavoriteIcon className={classes.likeBlack} />
                             </IconButton>
                         </Grid>
-                        <Typography variant="h5">Title: {el.title}</Typography>
-                        <Typography variant="h5">Company: {el.company}</Typography>
-                        <Typography variant="h5">Location: {el.location}</Typography>
-                        <Typography variant="h5">Type: {el.type}</Typography>
-                        <Typography variant="h5">Location: {el.location}</Typography>
+                        <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
+                        <Typography variant="h5"><b>Company:</b> {el.company}</Typography>
+                        <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
+                        <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
+                        <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                         {add(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
                         <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                         {/* {el.how_to_apply}<br/> */}
@@ -224,11 +224,11 @@ function Main(props) {
                                         <FavoriteIcon className={classes.likePrimary} />
                                     </IconButton>
                                 </Grid>
-                                <Typography variant="h5">Title: {el.title}</Typography>
-                                <Typography variant="h5">Company: {el.company}</Typography>
-                                <Typography variant="h5">Location: {el.location}</Typography>
-                                <Typography variant="h5">Type: {el.type}</Typography>
-                                <Typography variant="h5">Location: {el.location}</Typography>
+                                <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
+                                <Typography variant="h5"><b>Company:</b> {el.company}</Typography>
+                                <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
+                                <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
+                                <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                                 {add(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
                                 <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                                 {/* {el.how_to_apply}<br/> */}
