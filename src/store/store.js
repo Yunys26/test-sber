@@ -1,3 +1,4 @@
+// Libs
 import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
 import mainSlice from './slicesStore/mainSlice';
 

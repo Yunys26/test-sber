@@ -28,7 +28,7 @@ const mainSlice = createSlice({
     },
     // Обновление состояний
     reducers: {
-
+        
     },
     // Обновление внешних экшенов
     extraReducers: {
@@ -38,7 +38,6 @@ const mainSlice = createSlice({
     },
 });
 
-
 export default mainSlice.reducer;
 
-export const { getData, clickIncrement} = mainSlice.actions;
+// export const { } = mainSlice.actions;
