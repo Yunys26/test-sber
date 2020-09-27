@@ -2,7 +2,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// Оотправка запроса
+// Отправка запроса
 export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWorkStatus',
     async (inputValue) => {
         const response = await axios.get('http://localhost:9999/', {

@@ -14,7 +14,6 @@ import {
     IconButton
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // SLice Store
 import { responseDataWork } from './store/slicesStore/mainSlice';
 
@@ -132,8 +131,8 @@ function Main(props) {
         localStorage.setItem(`${inputValue}?${index}`, JSON.stringify(data[index]));
         alert('Добавлено в избранное');
     };
-
-    const deleteListFavorit = (index) => {
+    // Удаление из localStorage
+    const deleteListFavorite = (index) => {
         for (let i = 0; i < localStorage.length; i++) {
             if (i === index) {
                 localStorage.removeItem(localStorage.key(i));
@@ -141,8 +140,8 @@ function Main(props) {
             }
         }
     }
-
-    const add = (str) => {
+    // Обработка описания
+    const descriptionProcessing = (str) => {
         // let result = str.split('\n').join().split('<p>').join().split('</p>').join().split('<li>').join().split('</li>').join().split('<ul>').join().split('</ul>').join().split('<strong>').join().split('</strong>').join().split(',,,');
         let result = str.split('\n').join().split('<p>').join().split('</p>').join().split(',,,');
         // console.log(result)
@@ -198,7 +197,7 @@ function Main(props) {
                         <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                         <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
                         <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                        {add(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
+                        {descriptionProcessing(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
                         <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                         {/* {el.how_to_apply}<br/> */}
                     </Box>
@@ -212,6 +211,7 @@ function Main(props) {
 
                         favoritWork.push(JSON.parse(localStorage.getItem( localStorage.key(i))));
                     }
+
                     return favoritWork.map( (el, index) => 
                         <Box>
                             <Typography className={classes.headerSearchBlock} variant="h2">Favorit</Typography>
@@ -220,7 +220,7 @@ function Main(props) {
                                 <Grid container className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
                                     <Typography class={classes.nameCompany} variant="h3">{el.company}</Typography>
                                     <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>
-                                    <IconButton color="secondary" className={classes.likePrimary} onClick={() => deleteListFavorit(index)} >
+                                    <IconButton color="secondary" className={classes.likePrimary} onClick={() => deleteListFavorite(index)} >
                                         <FavoriteIcon className={classes.likePrimary} />
                                     </IconButton>
                                 </Grid>
@@ -229,7 +229,7 @@ function Main(props) {
                                 <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                                 <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
                                 <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                                {add(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
+                                {descriptionProcessing(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
                                 <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                                 {/* {el.how_to_apply}<br/> */}
                             </Box>
