@@ -2,6 +2,7 @@
 // Подключение express
 const express = require('express');
 const request = require('request');
+const bodyParser = require('body-parser');
 // Подклчючения CORS
 const cors = require('cors');
 // Создаем сервер/приложение

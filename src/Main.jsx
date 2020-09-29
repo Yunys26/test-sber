@@ -142,16 +142,15 @@ function Main(props) {
     }
     // Обработка описания
     const descriptionProcessing = (str) => {
-        // let result = str.split('\n').join().split('<p>').join().split('</p>').join().split('<li>').join().split('</li>').join().split('<ul>').join().split('</ul>').join().split('<strong>').join().split('</strong>').join().split(',,,');
-        let result = str.split('\n').join().split('<p>').join().split('</p>').join().split(',,,');
+        // let result = str.split('\n').join().split('<p>').join().split('</p>').join().split(',,,');
         // console.log(result)
-        return result;
+        return str.split('\n').join().split('<p>').join().split('</p>').join().split('<li>').join().split('</li>').join().split('<ul>').join().split('</ul>').join().split('<strong>').join().split('</strong>').join().split(',,,');
     };
 
     return (
         <Box className={classes.mainBlock} boxShadow={4}>
             <Typography variant="h1" align="center">Work<b>I<span className={classes.textN}>n</span></b>Search</Typography>
-            <Grid className={classes.searchBlock} container direction="row" justify="center" alignItems="center" xs={12}>
+            <Grid className={classes.searchBlock} container item={true} direction="row" justify="center" alignItems="center" xs={12}>
                 <ThemeProvider theme={themeSearchBlock}>
                     <CssBaseline />
                     <Input className="" color="secondary" autoFocus={true} value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="Enter"/>
@@ -183,10 +182,10 @@ function Main(props) {
                 </Button>
             </Grid>
             {data.map( (el, index) => 
-                <Box className={classes.blockContent}>
+                <Box key={index} className={classes.blockContent}>
                     <Box className={classes.workBlock} boxShadow={4} id={index} key={index}>
-                        <Grid container className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
-                            <Typography class={classes.nameCompany} variant="h3">{el.company}</Typography>
+                        <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
+                            <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
                             <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>
                             <IconButton className={classes.likeBlack} onClick={() => addAndDelInFavorite(index)} >
                                 <FavoriteIcon className={classes.likeBlack} />
@@ -197,7 +196,7 @@ function Main(props) {
                         <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                         <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
                         <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                        {descriptionProcessing(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
+                        {descriptionProcessing(el.description).map( (el, index) => <Typography key={index} variant="subtitle1">{el}</Typography>)}
                         <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                         {/* {el.how_to_apply}<br/> */}
                     </Box>
@@ -217,8 +216,8 @@ function Main(props) {
                             <Typography className={classes.headerSearchBlock} variant="h2">Favorit</Typography>
                             <Box className={classes.workBlock} boxShadow={4} id={index} key={index}>
                     
-                                <Grid container className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
-                                    <Typography class={classes.nameCompany} variant="h3">{el.company}</Typography>
+                                <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
+                                    <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
                                     <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>
                                     <IconButton color="secondary" className={classes.likePrimary} onClick={() => deleteListFavorite(index)} >
                                         <FavoriteIcon className={classes.likePrimary} />
@@ -229,7 +228,7 @@ function Main(props) {
                                 <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                                 <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
                                 <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                                {descriptionProcessing(el.description).map( (el) => <Typography variant="subtitle1">{el}</Typography>)}
+                                {descriptionProcessing(el.description).map( (el, index) => <Typography key={index} variant="subtitle1">{el}</Typography>)}
                                 <Typography className={classes.footerSearchBlock} variant="h6">{el.created_at}</Typography>
                                 {/* {el.how_to_apply}<br/> */}
                             </Box>
