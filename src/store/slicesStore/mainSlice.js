@@ -25,10 +25,16 @@ const mainSlice = createSlice({
     // Дефолтное состояние
     initialState: {
         dataResponse: [],
+        localStorageStore: [],
     },
     // Обновление состояний
     reducers: {
-        
+        showListLocalStorage: (state, action) => {
+            state.localStorageStore = action.payload;
+        },
+        deleteWorkInLocalStorageStore: (state, action) => {
+            state.localStorageStore = action.payload;
+        },
     },
     // Обновление внешних экшенов
     extraReducers: {
@@ -40,4 +46,4 @@ const mainSlice = createSlice({
 
 export default mainSlice.reducer;
 
-// export const { } = mainSlice.actions;
+export const { showListLocalStorage, deleteWorkInLocalStorageStore } = mainSlice.actions;
