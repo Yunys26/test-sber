@@ -4,17 +4,13 @@ const { createMuiTheme, makeStyles } = require("@material-ui/core");
 // Изменение элементов глобально, обращение к корневым стилям
 export const themeSearchBlock = createMuiTheme({
     overrides: {
-        MuiCssBaseline: {
-            '@global': {
-                input: {
-                    textAlign: 'center',
-                },
-            },
+        MuiInputBase: {
+            input: {
+                width: '320px',
+                textAlign: 'center',
+            }
         },
     },
-    'MuiInputBase-input': {
-        width: '300px',
-    }
 });
 
 // Созданный стиль для компоненты
@@ -91,5 +87,5 @@ export const useSearchBlockStyles = makeStyles({
         backgroundColor: "black",
         color: "#f50057",
         textAlign: "center",
-    }
+    },
 });

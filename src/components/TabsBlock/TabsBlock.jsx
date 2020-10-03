@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React, { useState } from 'react';
 // Libs
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
@@ -6,38 +6,40 @@ import {
     Tabs,
     Tab,
     Paper,
-    Box
+    Box,
+    ThemeProvider,
+    Typography
 } from '@material-ui/core';
 // Theme
-import { useTabsBlockStyle } from './tabsBlockTheme';
+import { themeTabs, useTabsBlockStyle } from './tabsBlockTheme';
 // Store action
 import { showListLocalStorage, deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
 // Components
 import ListWork from '../ListWork/ListWork';
+import ModalS from '../Modal/Modal';
 
 
 
 export default function TabsBlock(props) {
 
-    const { data, inputValue } = props;
+    const { data, inputValue, setInputValue } = props;
 
     const favoritesWorkList = useSelector(state => state.main.localStorageStore);
+
+    const modalStateStore = useSelector(state => state.main.modalState)
 
     const classes = useTabsBlockStyle();
 
     const dispatch = useDispatch();
 
-    // Добавление/Удаление в избранное
+    // Добавление/Удаление в избранное в tab work
     const addAndDelInFavorite = (index) => {
-
         for (let i = 0; i < localStorage.length; i++) {
             if (localStorage.key(i) === `${inputValue}?${index}`) {
                 localStorage.removeItem(localStorage.key(i));
-                return alert("Удалено из избранного");
             }
         }
         localStorage.setItem(`${inputValue}?${index}`, JSON.stringify(data[index]));
-        alert('Добавлено в избранное');
     };
 
     // Копирование localStorage в массив для хранения в хранилище 
@@ -64,13 +66,21 @@ export default function TabsBlock(props) {
                     textColor="secondary"
                     centered
                 >
-                    <NavLink className={classes.tabNavLink} to="/">
-                        <Tab label="Work" value={0} />
-                    </NavLink>
+                    <ThemeProvider theme={themeTabs}>
+                        <NavLink className={classes.tabNavLink} to="/">
+                            <Tab label="Work" value={0} />
+                        </NavLink>
 
-                    <NavLink onClick={() => dispatch(showListLocalStorage(showLocalStorage()))} className={classes.tabNavLink} to="/work">
-                        <Tab label="Work Favorites" value={1} />
-                    </NavLink>
+                        <NavLink 
+                            onClick={() => {
+                                dispatch(showListLocalStorage(showLocalStorage()));
+                                setInputValue('');
+                            }} 
+                            className={classes.tabNavLink} to="/work">
+                            <Tab label="Work Favorites" value={1} />
+                        </NavLink>
+                    </ThemeProvider>
+
                 </Tabs>
             </Paper>
             <Route exact path="/">
@@ -78,19 +88,19 @@ export default function TabsBlock(props) {
                     classes={classes}
                     data={data}
                     funcLogic={addAndDelInFavorite}
-                    statusList
+                    statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
+                // {data.length !== 0 && <span>по данному запросу {inputValue}</span>}
                 />
             </Route>
             <Route path="/work">
-                <Box>
                     <ListWork
                         classes={classes}
                         data={favoritesWorkList}
                         funcLogic={deleteStoreAndLocalStorage}
-                        statusList
+                        statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
                     />
-                </Box>
             </Route>
+            {modalStateStore && <ModalS open={modalStateStore} />}
         </>
     )
 }

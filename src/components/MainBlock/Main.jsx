@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // Libs
-import { Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Box,
@@ -9,7 +8,6 @@ import {
     Grid,
     Input,
     ThemeProvider,
-    CssBaseline,
 } from '@material-ui/core';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // SLice Store
@@ -33,24 +31,24 @@ function Main(props) {
     return (
             <Box className={classes.mainBlock} boxShadow={4}>
                 <Typography variant="h1" align="center">Work<b>I<span className={classes.textN}>n</span></b>Search</Typography>
-                <Grid className={classes.searchBlock} container item={true} direction="row" justify="center" alignItems="center" xs={12}>
+                <Grid className={classes.searchBlock} container item direction="row" justify="center" alignItems="center" xs={12}>
                     <ThemeProvider theme={themeSearchBlock}>
-                        <CssBaseline />
-                        <Input className="" color="secondary" autoFocus={true} value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="Enter" />
+                        <Input className="" color="secondary" autoFocus value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="Enter" />
                     </ThemeProvider>
                     <Button
                         className={classes.serachButton}
-                        onClick={
-                            () => (inputValue === '') ?
-                                alert("Вы ничего не ввели")
-                                :
-                                (() => {
-                                    dispatch(responseDataWork(inputValue));
-                                    // setInputValue('');
-                                })()
-                        }
+                        onClick={ () => dispatch(responseDataWork(inputValue))}
+                        //     () => (inputValue === '') ?
+                        //         alert("Вы ничего не ввели")
+                        //         :
+                        //         (() => {
+                        //             dispatch(responseDataWork(inputValue));
+                        //             // setInputValue('');
+                        //         })()
+                        // }
                         variant="outlined"
                         color="secondary"
+                        disabled={true && inputValue === ''}
                     >
                         Search Work
                 </Button>
@@ -58,6 +56,7 @@ function Main(props) {
                 <TabsBlock 
                     data={data}
                     inputValue={inputValue}
+                    setInputValue={setInputValue}
                 />
             </Box>
 

@@ -1,5 +1,29 @@
 
-const { makeStyles } = require("@material-ui/core");
+const { makeStyles, createMuiTheme } = require("@material-ui/core");
+
+export const themeTabs = createMuiTheme({
+    overrides: {
+        MuiTab: {
+            root: {
+                fontSize: '20px',
+            }
+        },
+        MuiCssBaseline: {
+            '@global': {
+                a: {
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#f50057',
+                    textDecoration: 'none',
+                    '&:hover': {
+                        color: 'black',
+                    }
+                },
+            },
+        },
+    },
+
+})
 
 export const useTabsBlockStyle = makeStyles({
     nameCompany: {
@@ -59,7 +83,7 @@ export const useTabsBlockStyle = makeStyles({
         textAlign: "center",
     },
     paperTabs: {
-        padding: '2px',
+        padding: '5px',
         backgroundColor: '#202020',
         borderRadius: '20px',
         marginBottom: '20px',
@@ -69,19 +93,18 @@ export const useTabsBlockStyle = makeStyles({
         '&:hover': {
             transition: "0.8s",
             backgroundColor: "#f50057",
-            color: "Black",
+            color: "black",
         }
     },
     tabNavLink: {
         textDecoration: 'none',
         color: 'white',
         '&:hover': {
-
             color: '#202020',
         }
 
     },
     textTitleTabs: {
         textAlign: 'center'
-    }
+    },
 });
