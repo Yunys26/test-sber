@@ -22,7 +22,6 @@ export const themeTabs = createMuiTheme({
             },
         },
     },
-
 })
 
 export const useTabsBlockStyle = makeStyles({
@@ -53,14 +52,14 @@ export const useTabsBlockStyle = makeStyles({
         height: "64px",
         '&:active': {
             color: "#f50057",
-        }
+        },
     },
     likePrimary: {
         width: "64px",
         height: "64px",
         '&:active': {
             color: "#f50057",
-        }
+        },
     },
     blockContent: {
         marginBottom: "40px",
@@ -94,17 +93,16 @@ export const useTabsBlockStyle = makeStyles({
             transition: "0.8s",
             backgroundColor: "#f50057",
             color: "black",
-        }
+        },
     },
     tabNavLink: {
         textDecoration: 'none',
         color: 'white',
         '&:hover': {
             color: '#202020',
-        }
-
+        },
     },
     textTitleTabs: {
-        textAlign: 'center'
+        textAlign: 'center',
     },
 });

@@ -14,7 +14,10 @@ export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWor
             console.log(res.data);
             return res;
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err);
+            alert("Hello")
+        })
         return response.data;
     }
 );

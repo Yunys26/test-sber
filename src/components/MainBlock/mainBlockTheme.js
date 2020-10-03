@@ -10,6 +10,11 @@ export const themeSearchBlock = createMuiTheme({
                 textAlign: 'center',
             }
         },
+        MuiIconButton: {
+            root: {
+                // color: "black"
+            }
+        },
     },
 });
 
@@ -55,11 +60,12 @@ export const useSearchBlockStyles = makeStyles({
         height: "160px",
     },
     likeBlack: {
+        color: "#f50057",
         width: "64px",
         height: "64px",
-        '&:active': {
-            color: "#f50057",
-        }
+        // '&:active': {
+        //     color: "#f50057",
+        // }
     },
     likePrimary: {
         width: "64px",

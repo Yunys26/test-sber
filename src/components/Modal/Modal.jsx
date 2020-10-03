@@ -27,15 +27,17 @@ export default function ModalS(props) {
             <Fade in={open}>
                 <div className={classes.paper}>
                     <h2 id="spring-modal-title">Warning</h2>
-                    <p id="spring-modal-description">Maximum limit reached</p>
-                    <Button onClick={() => dispatch(openAndCloseModal(false))}>Ок</Button>
-                    <Button onClick={() => {
-                        localStorage.clear();
-                        dispatch(openAndCloseModal(false));
+                    <p id="spring-modal-description"><b>Maximum limit reached</b></p>
+                    <div className={classes.footerButton}>
+                        <Button onClick={() => dispatch(openAndCloseModal(false))}>Ок</Button>
+                        <Button className={classes.buttonLastModal} variant="outlined" color="secondary" onClick={() => {
+                            localStorage.clear();
+                            dispatch(openAndCloseModal(false));
                         }}
-                    >
-                        <b>Удалить все избранное</b>
-                    </Button>
+                        >
+                            <b>Удалить все избранное</b>
+                        </Button>
+                    </div>
                 </div>
             </Fade>
         </Modal>

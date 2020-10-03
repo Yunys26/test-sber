@@ -10,12 +10,13 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 // Theme
+import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
+import { openAndCloseModal} from '../../store/slicesStore/mainSlice';
 
 export default function ListWork(props) {
 
-    const { classes, data, funcLogic, statusList, statusListFavorit } = props;
+    const { classes, data, funcLogic, statusList, statusListFavorit, colorButtonIcon } = props;
 
     const dispatch = useDispatch();
 
@@ -28,9 +29,12 @@ export default function ListWork(props) {
                             <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
                                 <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
                                 {el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img> || null}
-                                <IconButton className={classes.likeBlack} onClick={() => (localStorage.length <= 3 && funcLogic(index)) || (localStorage.length > 3 && dispatch(openAndCloseModal(true)))} >
-                                    <FavoriteIcon className={classes.likeBlack} />
-                                </IconButton>
+                                <ThemeProvider theme={themeSearchBlock}>
+                                <CssBaseline/>
+                                    <IconButton key={index} style={ colorButtonIcon && {color: "#f50057"}} className={classes.likeBlack} onClick={() => (localStorage.length <= 3 && funcLogic(index)) || (localStorage.length > 3 && dispatch(openAndCloseModal(true)))} >
+                                        <FavoriteIcon className={classes.likeBlack} />
+                                    </IconButton>
+                                </ThemeProvider>
                             </Grid>
                             <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
                             <Typography variant="h5"><b>Company:</b> {el.company}</Typography>

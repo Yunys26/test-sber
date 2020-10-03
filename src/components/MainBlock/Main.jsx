@@ -27,6 +27,8 @@ function Main(props) {
     const classes = useSearchBlockStyles();
 
     const [inputValue, setInputValue] = useState('');
+    
+    const regex = new RegExp('[а-яА-Я]');
 
     return (
             <Box className={classes.mainBlock} boxShadow={4}>
@@ -48,7 +50,7 @@ function Main(props) {
                         // }
                         variant="outlined"
                         color="secondary"
-                        disabled={true && inputValue === ''}
+                        disabled={true && inputValue === '' || regex.test(inputValue)}
                     >
                         Search Work
                 </Button>
