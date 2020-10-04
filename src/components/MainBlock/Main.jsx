@@ -9,8 +9,7 @@ import {
     Input,
     ThemeProvider,
 } from '@material-ui/core';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// SLice Store
+// Store slice
 import { responseDataWork } from '../../store/slicesStore/mainSlice';
 // Theme
 import { themeSearchBlock, useSearchBlockStyles } from './mainBlockTheme';
@@ -39,18 +38,10 @@ function Main(props) {
                     </ThemeProvider>
                     <Button
                         className={classes.serachButton}
-                        onClick={ () => dispatch(responseDataWork(inputValue))}
-                        //     () => (inputValue === '') ?
-                        //         alert("Вы ничего не ввели")
-                        //         :
-                        //         (() => {
-                        //             dispatch(responseDataWork(inputValue));
-                        //             // setInputValue('');
-                        //         })()
-                        // }
+                        onClick={() => dispatch(responseDataWork(inputValue))}
                         variant="outlined"
                         color="secondary"
-                        disabled={true && inputValue === '' || regex.test(inputValue)}
+                        disabled={(true && inputValue === '') || regex.test(inputValue)}
                     >
                         Search Work
                 </Button>

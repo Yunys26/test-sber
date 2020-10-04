@@ -1,5 +1,6 @@
 import React from 'react';
 // Libs
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import {
@@ -99,7 +100,14 @@ export default function TabsBlock(props) {
                     colorButtonIcon
                 />
             </Route>
+            
             {modalStateStore && <ModalS open={modalStateStore} />}
         </>
     )
+}
+
+TabsBlock.propTypes = {
+    data: PropTypes.object,
+    inputValue: PropTypes.string,
+    setInputValue: PropTypes.func,
 }

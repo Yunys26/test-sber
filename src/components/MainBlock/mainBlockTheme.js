@@ -56,8 +56,11 @@ export const useSearchBlockStyles = makeStyles({
         padding: "40px",
     },
     workBlockLogo: {
-        width: "400px",
-        height: "160px",
+        objectFit: 'cover',
+        width: '320px',
+        height: 'auto',
+        // width: "400px",
+        // height: "160px",
     },
     likeBlack: {
         color: "#f50057",

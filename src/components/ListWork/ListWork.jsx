@@ -7,6 +7,7 @@ import {
     IconButton,
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 // Theme
@@ -25,10 +26,12 @@ export default function ListWork(props) {
             {((data.length === 0 && statusList) || (data.length === 0 && statusListFavorit)) ||            
                 data.map((el, index) =>
                     <Box key={index} className={classes.blockContent}>
+
                         <Box className={classes.workBlock} boxShadow={4} id={index} key={index}>
+                        
                             <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
                                 <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
-                                {el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img> || null}
+                                {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
                                 <ThemeProvider theme={themeSearchBlock}>
                                 <CssBaseline/>
                                     <IconButton key={index} style={ colorButtonIcon && {color: "#f50057"}} className={classes.likeBlack} onClick={() => (localStorage.length <= 3 && funcLogic(index)) || (localStorage.length > 3 && dispatch(openAndCloseModal(true)))} >
@@ -36,6 +39,7 @@ export default function ListWork(props) {
                                     </IconButton>
                                 </ThemeProvider>
                             </Grid>
+                            
                             <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
                             <Typography variant="h5"><b>Company:</b> {el.company}</Typography>
                             <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
@@ -46,11 +50,22 @@ export default function ListWork(props) {
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.how_to_apply }}></div>
                             </ThemeProvider>
-                            <Typography className={classes.footerSearchBlock} variant="h6">{moment(el.created_at).format('LLLL')}</Typography>
+                            <Typography className={classes.footerSearchBlock} variant="h6">{data.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
+                        
                         </Box>
+                        
                     </Box>
                 )
             }
         </>
     )
+}
+
+ListWork.propTypes = {
+    classes: PropTypes.object,
+    data: PropTypes.object,
+    statusList: PropTypes.object,
+    statusListFavorit: PropTypes.object,
+    funcLogic: PropTypes.func,
+    colorButtonIcon: PropTypes.bool,
 }

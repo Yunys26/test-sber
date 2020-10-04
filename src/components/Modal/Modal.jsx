@@ -1,7 +1,11 @@
-import { Button, Fade, Modal } from '@material-ui/core';
-import React from 'react'
-import { useStyles } from './ModalTheme';
+import React from 'react';
+// Libs
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { Button, Fade, Modal } from '@material-ui/core';
+// Theme
+import { useStyles } from './ModalTheme';
+//  Store slice
 import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
 
 export default function ModalS(props) {
@@ -10,7 +14,8 @@ export default function ModalS(props) {
 
     const dispatch = useDispatch();
 
-    const { open } = props
+    const { open } = props;
+    
     return (
         <Modal
             aria-labelledby="spring-modal-title"
@@ -19,7 +24,6 @@ export default function ModalS(props) {
             open={open}
             onClose={() => dispatch(openAndCloseModal(false))}
             closeAfterTransition
-            // BackdropComponent={Backdrop}
             BackdropProps={{
                 timeout: 500,
             }}
@@ -43,3 +47,7 @@ export default function ModalS(props) {
         </Modal>
     )
 }
+
+Modal.propTypes = {
+    open: PropTypes.bool,
+};

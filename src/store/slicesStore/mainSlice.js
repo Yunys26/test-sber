@@ -16,11 +16,11 @@ export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWor
         })
         .catch(err => {
             console.log(err);
-            alert("Hello")
         })
         return response.data;
     }
 );
+
 // Создане ветви хранилища
 const mainSlice = createSlice({
     // Название слоя
@@ -46,7 +46,22 @@ const mainSlice = createSlice({
     // Обновление внешних экшенов
     extraReducers: {
         [responseDataWork.fulfilled]: (state, aciton) => {
+            console.log("Load")
             state.dataResponse = aciton.payload;
+        },
+        [responseDataWork.pending]: (state) => {
+            state.dataResponse = [{
+                company: 'Loading...',
+                company_logo: null,
+                company_url: 'Loading...',
+                // created_at: 'Loading...',
+                description: 'Loading...',
+                hot_to_apply: 'Loading...',
+                location: 'Loading...',
+                title: 'Loading...',
+                type: 'Loading...',
+            }];
+            console.log("Pending")
         }
     },
 });
