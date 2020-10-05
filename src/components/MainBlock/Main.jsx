@@ -41,7 +41,7 @@ function Main(props) {
                         onClick={() => dispatch(responseDataWork(inputValue))}
                         variant="outlined"
                         color="secondary"
-                        disabled={(true && inputValue === '') || regex.test(inputValue)}
+                        disabled={(inputValue === '') || regex.test(inputValue)}
                     >
                         Search Work
                 </Button>

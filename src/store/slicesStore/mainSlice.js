@@ -46,21 +46,19 @@ const mainSlice = createSlice({
     // Обновление внешних экшенов
     extraReducers: {
         [responseDataWork.fulfilled]: (state, aciton) => {
-            console.log("Load")
+            console.log("Load");
             state.dataResponse = aciton.payload;
         },
         [responseDataWork.pending]: (state) => {
             state.dataResponse = [{
-                company: 'Loading...',
-                company_logo: null,
-                company_url: 'Loading...',
-                description: 'Loading...',
-                hot_to_apply: 'Loading...',
-                location: 'Loading...',
-                title: 'Loading...',
-                type: 'Loading...',
+                status: 'Loading...',
             }];
-            console.log("Pending")
+        },
+        [responseDataWork.rejected]: (state) => {
+            state.dataResponse = [{
+                status: 'Error',
+            }];
+            console.log("Failed");
         }
     },
 });

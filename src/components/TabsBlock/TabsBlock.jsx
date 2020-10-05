@@ -15,8 +15,9 @@ import { themeTabs, useTabsBlockStyle } from './tabsBlockTheme';
 // Store action
 import { showListLocalStorage, deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
 // Components
-import ListWork from '../ListWork/ListWork';
+import ListWork from '../List/ListWork';
 import ModalS from '../Modal/Modal';
+import { ListFavorite } from '../List/ListFavorite';
     
 
 
@@ -93,21 +94,24 @@ export default function TabsBlock(props) {
                 </Tabs>
             </Paper>
             <Route exact path="/">
-                <ListWork
-                    classes={classes}
-                    data={data}
-                    funcLogic={addAndDelInFavorite}
-                    statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
-                />
+                {data.length === 1 && data.map( (el) => <Typography variant="h1" align="center">{el.status}</Typography>) ||
+                    <ListWork
+                        classes={classes}
+                        data={data}
+                        funcLogic={addAndDelInFavorite}
+                        statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
+                    />
+                }
             </Route>
             <Route path="/work">
-                <ListWork
-                    classes={classes}
-                    data={favoritesWorkList}
-                    funcLogic={deleteStoreAndLocalStorage}
-                    statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
-                    colorButtonIcon
-                />
+                {data.length === 1 && data.map( (el) => <Typography variant="h1" align="center">{el.status}</Typography>) ||
+                    <ListFavorite
+                        classes={classes}
+                        data={favoritesWorkList}
+                        funcLogic={deleteStoreAndLocalStorage}
+                        statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
+                    />
+                }
             </Route>
             
             {modalStateStore && <ModalS open={modalStateStore} />}

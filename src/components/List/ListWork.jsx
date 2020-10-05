@@ -1,10 +1,12 @@
-import { Box, CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 // Libs
 import {
     Typography,
     Grid,
     IconButton,
+    Box, 
+    CssBaseline, 
+    ThemeProvider
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
@@ -13,28 +15,37 @@ import { useDispatch } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal} from '../../store/slicesStore/mainSlice';
+import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
 
 export default function ListWork(props) {
 
-    const { classes, data, funcLogic, statusList, statusListFavorit, colorButtonIcon } = props;
+    const { classes, data, funcLogic, statusList } = props;
 
     const dispatch = useDispatch();
 
-    return (
-        <>
-            {((data.length === 0 && statusList) || (data.length === 0 && statusListFavorit)) ||            
-                data.map((el, index) =>
-                    <Box key={index} className={classes.blockContent}>
+    const handleClick = (index) => {
+        (localStorage.length <= 3 && funcLogic(index)) 
+        || 
+        (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
+    };
 
-                        <Box className={classes.workBlock} boxShadow={4} id={index} key={index}>
+    return (
+        <div>
+            {
+                data.length === 0 && statusList || data.map((el, index) =>
+                    <Box className={classes.blockContent}>
+
+                        <Box className={classes.workBlock} boxShadow={4} id={index} >
                         
                             <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
                                 <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
                                 {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
                                 <ThemeProvider theme={themeSearchBlock}>
                                 <CssBaseline/>
-                                    <IconButton key={index} style={ colorButtonIcon && {color: "#f50057"}} className={classes.likeBlack} onClick={() => (localStorage.length <= 3 && funcLogic(index)) || (localStorage.length > 3 && dispatch(openAndCloseModal(true)))} >
+                                    <IconButton 
+                                        className={classes.likeBlack} 
+                                        onClick={() => handleClick(index)}
+                                        >
                                         <FavoriteIcon className={classes.likeBlack} />
                                     </IconButton>
                                 </ThemeProvider>
@@ -57,7 +68,7 @@ export default function ListWork(props) {
                     </Box>
                 )
             }
-        </>
+        </div> 
     )
 }
 
@@ -65,7 +76,5 @@ ListWork.propTypes = {
     classes: PropTypes.object,
     data: PropTypes.array,
     statusList: PropTypes.object,
-    statusListFavorit: PropTypes.object,
     funcLogic: PropTypes.func,
-    colorButtonIcon: PropTypes.bool,
 }
