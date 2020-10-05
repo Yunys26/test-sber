@@ -106,4 +106,9 @@ export const useTabsBlockStyle = makeStyles({
     textTitleTabs: {
         textAlign: 'center',
     },
+    statusLoadingText: {
+        fontWeight: 'bold',
+        marginTop: '20px',
+        color: '#f50057',
+    }
 });

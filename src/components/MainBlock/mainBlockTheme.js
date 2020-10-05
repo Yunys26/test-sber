@@ -10,11 +10,6 @@ export const themeSearchBlock = createMuiTheme({
                 textAlign: 'center',
             }
         },
-        MuiIconButton: {
-            root: {
-                // color: "black"
-            }
-        },
     },
 });
 

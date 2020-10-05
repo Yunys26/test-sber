@@ -17,9 +17,8 @@ import { showListLocalStorage, deleteWorkInLocalStorageStore } from '../../store
 // Components
 import ListWork from '../List/ListWork';
 import ModalS from '../Modal/Modal';
-import { ListFavorite } from '../List/ListFavorite';
+import ListFavorite from '../List/ListFavorite';
     
-
 
 export default function TabsBlock(props) {
 
@@ -94,7 +93,7 @@ export default function TabsBlock(props) {
                 </Tabs>
             </Paper>
             <Route exact path="/">
-                {data.length === 1 && data.map( (el) => <Typography variant="h1" align="center">{el.status}</Typography>) ||
+                {data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center">{el.status}</Typography>) ||
                     <ListWork
                         classes={classes}
                         data={data}
@@ -104,7 +103,7 @@ export default function TabsBlock(props) {
                 }
             </Route>
             <Route path="/work">
-                {data.length === 1 && data.map( (el) => <Typography variant="h1" align="center">{el.status}</Typography>) ||
+                {data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center">{el.status}</Typography>) ||
                     <ListFavorite
                         classes={classes}
                         data={favoritesWorkList}

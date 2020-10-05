@@ -9,6 +9,8 @@ const app = express();
 // Порт на котором работает API
 const port = 9999;
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 app.use(cors());
 
 app.get('/', (req, res) => {
