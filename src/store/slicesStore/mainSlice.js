@@ -54,7 +54,6 @@ const mainSlice = createSlice({
                 company: 'Loading...',
                 company_logo: null,
                 company_url: 'Loading...',
-                // created_at: 'Loading...',
                 description: 'Loading...',
                 hot_to_apply: 'Loading...',
                 location: 'Loading...',

@@ -63,7 +63,7 @@ export default function ListWork(props) {
 
 ListWork.propTypes = {
     classes: PropTypes.object,
-    data: PropTypes.object,
+    data: PropTypes.array,
     statusList: PropTypes.object,
     statusListFavorit: PropTypes.object,
     funcLogic: PropTypes.func,

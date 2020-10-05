@@ -107,7 +107,7 @@ export default function TabsBlock(props) {
 }
 
 TabsBlock.propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.array,
     inputValue: PropTypes.string,
     setInputValue: PropTypes.func,
 }

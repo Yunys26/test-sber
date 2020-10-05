@@ -26,6 +26,7 @@ export const themeTabs = createMuiTheme({
 
 export const useTabsBlockStyle = makeStyles({
     nameCompany: {
+        marginBottom: "30px",
         fontSize: "41px",
         padding: "10px",
         backgroundColor: "black",
