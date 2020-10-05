@@ -106,4 +106,10 @@ export const useTabsBlockStyle = makeStyles({
     textTitleTabs: {
         textAlign: 'center',
     },
+    divBlock: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

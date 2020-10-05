@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Libs
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,6 +32,8 @@ export default function TabsBlock(props) {
 
     const dispatch = useDispatch();
 
+    const [valueIndexOne, setValueIndexOne] = useState(0);
+
     // Добавление/Удаление в избранное в tab work
     const addAndDelInFavorite = (index) => {
         for (let i = 0; i < localStorage.length; i++) {
@@ -57,7 +59,12 @@ export default function TabsBlock(props) {
     const deleteStoreAndLocalStorage = (index) => {
         localStorage.removeItem(localStorage.key(index));
         dispatch(deleteWorkInLocalStorageStore(favoritesWorkList.filter(data => data.id !== favoritesWorkList[index].id)));
-    }
+    };
+
+    // Логика работы Tabs
+    const tabsIndexOne = () => {
+        (valueIndexOne === 0 && setValueIndexOne(1)) || (valueIndexOne === 1 && setValueIndexOne(0));
+    };
 
     return (
         <>
@@ -66,21 +73,23 @@ export default function TabsBlock(props) {
                     indicatorColor="secondary"
                     textColor="secondary"
                     centered
+                    onClick={() => tabsIndexOne()}
+                    value={valueIndexOne}
                 >
                     <ThemeProvider theme={themeTabs}>
                         <NavLink className={classes.tabNavLink} to="/">
-                            <Tab label="Work" value={0} />
-                        </NavLink>
-                        <NavLink 
-                            onClick={() => {
-                                dispatch(showListLocalStorage(showLocalStorage()));
-                                setInputValue('');
-                            }}
-                            className={classes.tabNavLink} to="/work"
-                        >
-                            <Tab label="Work Favorites" value={1} />
+                            <Tab label="Work" value={0}/>
                         </NavLink>
                     </ThemeProvider>
+                    <NavLink 
+                        onClick={() => {
+                            dispatch(showListLocalStorage(showLocalStorage()));
+                            setInputValue('');
+                        }}
+                        className={classes.tabNavLink} to="/work"
+                    >
+                        <Tab label="Work Favorites" value={1}/>
+                    </NavLink>
                 </Tabs>
             </Paper>
             <Route exact path="/">
