@@ -22,11 +22,13 @@ import ListFavorite from '../List/ListFavorite';
 
 export default function TabsBlock(props) {
 
-    const { data, inputValue, setInputValue } = props;
+    const { inputValue, setInputValue } = props;
 
     const favoritesWorkList = useSelector(state => state.main.localStorageStore);
 
-    const modalStateStore = useSelector(state => state.main.modalState)
+    const modalStateStore = useSelector(state => state.main.modalState);
+
+    const data = useSelector(state => state.main.dataResponse);
 
     const classes = useTabsBlockStyle();
 
@@ -119,7 +121,6 @@ export default function TabsBlock(props) {
 }
 
 TabsBlock.propTypes = {
-    data: PropTypes.array,
     inputValue: PropTypes.string,
     setInputValue: PropTypes.func,
 }

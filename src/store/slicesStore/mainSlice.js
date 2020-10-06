@@ -11,13 +11,12 @@ export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWor
             }
         })
         .then(res => {
-            console.log(res.data);
             return res;
         })
         .catch(err => {
             console.log(err);
         })
-        return response.data;
+        return response.data.map( (el) => ({...el, favorite: false}) );
     }
 );
 
@@ -35,6 +34,7 @@ const mainSlice = createSlice({
     reducers: {
         showListLocalStorage: (state, action) => {
             state.localStorageStore = action.payload;
+            console.log(state.localStorageStore)
         },
         deleteWorkInLocalStorageStore: (state, action) => {
             state.localStorageStore = action.payload;
@@ -46,18 +46,16 @@ const mainSlice = createSlice({
     // Обновление внешних экшенов
     extraReducers: {
         [responseDataWork.fulfilled]: (state, aciton) => {
-            console.log("Load");
             state.dataResponse = aciton.payload;
+            console.log("Load");
+            console.log(aciton.payload);
         },
         [responseDataWork.pending]: (state) => {
-            state.dataResponse = [{
-                status: 'Loading...',
-            }];
+            state.dataResponse = [{status: 'Loading...'}];
+            console.log('Pending');
         },
         [responseDataWork.rejected]: (state) => {
-            state.dataResponse = [{
-                status: 'Error',
-            }];
+            state.dataResponse = [{status: 'Error'}];
             console.log("Failed");
         }
     },
@@ -65,4 +63,4 @@ const mainSlice = createSlice({
 
 export default mainSlice.reducer;
 
-export const { showListLocalStorage, deleteWorkInLocalStorageStore, openAndCloseModal } = mainSlice.actions;
+export const {sss, addDataStorageWorkList ,showListLocalStorage, deleteWorkInLocalStorageStore, openAndCloseModal } = mainSlice.actions;

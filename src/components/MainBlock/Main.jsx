@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Libs
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
     Box,
     Button,
@@ -19,8 +19,6 @@ import TabsBlock from '../TabsBlock/TabsBlock';
 
 function Main(props) {
     // Hooks
-    const data = useSelector(state => state.main.dataResponse);
-
     const dispatch = useDispatch();
 
     const classes = useSearchBlockStyles();
@@ -28,6 +26,7 @@ function Main(props) {
     const [inputValue, setInputValue] = useState('');
     
     const regex = new RegExp('[а-яА-Я]');
+
 
     return (
             <Box className={classes.mainBlock} boxShadow={4}>
@@ -46,8 +45,7 @@ function Main(props) {
                         Search Work
                 </Button>
                 </Grid>
-                <TabsBlock 
-                    data={data}
+                <TabsBlock
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                 />

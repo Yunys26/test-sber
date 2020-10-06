@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 // Libs
 import {
     Typography,
@@ -28,6 +28,11 @@ export default function ListFavorite(props) {
         || 
         (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
     };
+
+    useEffect(() => {
+        alert(1)
+        return alert(2)
+    })
 
     return (
         <div>

@@ -42,10 +42,13 @@ export default function ListWork(props) {
                                 {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
                                 <ThemeProvider theme={themeSearchBlock}>
                                 <CssBaseline/>
-                                    <IconButton 
+                                    <IconButton
+                                        id={el.id}
+                                        style={{color: el.color}}
                                         className={classes.likeBlack} 
-                                        onClick={() => handleClick(index)}
-                                        >
+                                        onClick={() => {
+                                            handleClick(index);
+                                        }}>
                                         <FavoriteIcon className={classes.likeBlack} />
                                     </IconButton>
                                 </ThemeProvider>
