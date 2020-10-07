@@ -35,7 +35,7 @@ export default function TabsBlock(props) {
     const dispatch = useDispatch();
 
     const [valueIndexOne, setValueIndexOne] = useState(0);
-
+    console.log(data)
     // Добавление/Удаление в избранное в tab work
     const addAndDelInFavorite = (index) => {
         for (let i = 0; i < localStorage.length; i++) {

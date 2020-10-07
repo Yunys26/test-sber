@@ -10,12 +10,11 @@ import {
     ThemeProvider,
 } from '@material-ui/core';
 // Store slice
-import { responseDataWork } from '../../store/slicesStore/mainSlice';
+import { responseDataWork } from '../../store/slicesStore/middleWareMainSlice';
 // Theme
 import { themeSearchBlock, useSearchBlockStyles } from './mainBlockTheme';
 // Components
 import TabsBlock from '../TabsBlock/TabsBlock';
-
 
 function Main(props) {
     // Hooks
@@ -26,7 +25,6 @@ function Main(props) {
     const [inputValue, setInputValue] = useState('');
     
     const regex = new RegExp('[а-яА-Я]');
-
 
     return (
             <Box className={classes.mainBlock} boxShadow={4}>

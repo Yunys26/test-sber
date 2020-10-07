@@ -11,11 +11,12 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
+import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
+import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork(props) {
 
@@ -23,12 +24,13 @@ export default function ListWork(props) {
 
     const dispatch = useDispatch();
 
+    const local = useSelector(state => state.main.localStorageStore);
+
     const handleClick = (index) => {
         (localStorage.length <= 3 && funcLogic(index)) 
         || 
         (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
     };
-
     return (
         <div>
             {
@@ -38,33 +40,35 @@ export default function ListWork(props) {
                         <Box className={classes.workBlock} boxShadow={4} id={index} >
                         
                             <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
-                                <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
-                                {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
+                                <Typography className={classes.nameCompany} variant="h3">{el.dataDescription.company}</Typography>
+                                {(el.dataDescription.company_logo !== null && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt=""></img>) || null}
                                 <ThemeProvider theme={themeSearchBlock}>
                                 <CssBaseline/>
                                     <IconButton
-                                        id={el.id}
-                                        style={{color: el.color}}
+                                        id={el.dataDescription.id}
+                                        style={{color: el.dataDescription.color && "black"}}
                                         className={classes.likeBlack} 
                                         onClick={() => {
-                                            handleClick(index);
+                                            // handleClick(index);
+                                            // handleClick(el.dataDescription.id)
+                                            dispatch(showListLocalStorage(addAndDelLocal(el.dataDescription.id, index, data, local)));
                                         }}>
                                         <FavoriteIcon className={classes.likeBlack} />
                                     </IconButton>
                                 </ThemeProvider>
                             </Grid>
                             
-                            <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
-                            <Typography variant="h5"><b>Company:</b> {el.company}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                            <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
+                            <Typography variant="h5"><b>Title:</b> {el.dataDescription.title}</Typography>
+                            <Typography variant="h5"><b>Company:</b> {el.dataDescription.company}</Typography>
+                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
+                            <Typography variant="h5"><b>Type:</b> {el.dataDescription.type}</Typography>
+                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
                             <ThemeProvider theme={themeTabs}>
                             <CssBaseline/>
-                                <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>
-                                <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.how_to_apply }}></div>
+                                <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.dataDescription.description }}></div>
+                                <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.dataDescription.how_to_apply }}></div>
                             </ThemeProvider>
-                            <Typography className={classes.footerSearchBlock} variant="h6">{data.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
+                            <Typography className={classes.footerSearchBlock} variant="h6">{data.length !== 1 && moment(el.dataDescription.created_at).format('LLLL')}</Typography>
                         
                         </Box>
                         

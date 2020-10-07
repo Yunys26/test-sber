@@ -11,17 +11,19 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
+import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
 
 export default function ListFavorite(props) {
 
     const { classes, data, funcLogic, statusListFavorit } = props;
 
     const dispatch = useDispatch();
+
+    const localst = useSelector(state => state.main.localStorageStore)
 
     const handleClick = (index) => {
         (localStorage.length <= 3 && funcLogic(index)) 
@@ -30,13 +32,15 @@ export default function ListFavorite(props) {
     };
 
     useEffect(() => {
-        alert(1)
-        return alert(2)
-    })
+        dispatch(showListLocalStorage(JSON.parse(localStorage.getItem(localStorage.key(0)))))
+        return () => {
+            localStorage.getItem('local', JSON.stringify(localst))
+        }
+    }, []);
 
     return (
         <div>
-            {
+            {/* {
                 data.length === 0 && statusListFavorit || data.map(( el, index ) => 
                     <Box className={classes.blockContent}>
                         <Box className={classes.workBlock} boxShadow={4} id={el.id} >
@@ -80,7 +84,7 @@ export default function ListFavorite(props) {
                         
                     </Box>
                 )
-            }
+            } */}
         </div>
     )
 }

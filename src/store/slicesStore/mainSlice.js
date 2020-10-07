@@ -1,24 +1,7 @@
 // Libs
 import axios from "axios";
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-// Отправка запроса
-export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWorkStatus',
-    async (inputValue) => {
-        const response = await axios.get('http://localhost:9999/', {
-            params: {
-                input: inputValue,
-            }
-        })
-        .then(res => {
-            return res;
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        return response.data.map( (el) => ({...el, favorite: false}) );
-    }
-);
+import { responseDataWork } from './middleWareMainSlice';
 
 // Создане ветви хранилища
 const mainSlice = createSlice({
@@ -63,4 +46,4 @@ const mainSlice = createSlice({
 
 export default mainSlice.reducer;
 
-export const {sss, addDataStorageWorkList ,showListLocalStorage, deleteWorkInLocalStorageStore, openAndCloseModal } = mainSlice.actions;
+export const { showListLocalStorage, deleteWorkInLocalStorageStore, openAndCloseModal } = mainSlice.actions;
