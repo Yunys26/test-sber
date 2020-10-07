@@ -31,6 +31,26 @@ export default function ListWork(props) {
         || 
         (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
     };
+
+    React.useEffect(() => {
+        const sss = (arr) => {
+            for(let i = 0; i < arr.length; i++) {
+
+            }
+        }
+        if (Object.keys(local).length !== 0) {
+            // data.map( (el) => {} )
+            console.log()
+            console.log(Object.keys(local)[0])
+        }
+        // Object.keys(local).length === null && console.log(Object.keys(local))
+        // console.log(Object.keys(local).length)
+        // // return () => {
+        // // }
+    }, [local])
+
+
+
     return (
         <div>
             {

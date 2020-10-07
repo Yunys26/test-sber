@@ -1,4 +1,3 @@
-import { colors } from "@material-ui/core";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -27,11 +26,18 @@ export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWor
 
 export const addAndDelLocal = (id, index, data, local) => {
     const result = {
-        localStorage: {
-            [id]: {...data[index].dataDescription, favorite: true}, 
-            ...local.localStorage
-        }
+        [id]: {...data[index].dataDescription, favorite: true}, 
+        ...local,
     }
     localStorage.setItem('local', JSON.stringify(result))
     return result;
+}
+
+export const asd = (id, data) => {
+    let ds = null;
+    for (let i = 0; i < data.length; i++) {
+        if (id === data[i].id) {
+            // должны переприсвоить эти данные и обновить хранилище работы
+        }
+    }
 }

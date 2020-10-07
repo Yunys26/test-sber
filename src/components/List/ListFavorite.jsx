@@ -23,7 +23,7 @@ export default function ListFavorite(props) {
 
     const dispatch = useDispatch();
 
-    const localst = useSelector(state => state.main.localStorageStore)
+    const local = useSelector(state => state.main.localStorageStore);
 
     const handleClick = (index) => {
         (localStorage.length <= 3 && funcLogic(index)) 
@@ -31,10 +31,11 @@ export default function ListFavorite(props) {
         (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
     };
 
-    useEffect(() => {
-        dispatch(showListLocalStorage(JSON.parse(localStorage.getItem(localStorage.key(0)))))
+    React.useEffect(() => {
+        console.log(1)
+        dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
         return () => {
-            localStorage.getItem('local', JSON.stringify(localst))
+            localStorage.getItem('local', JSON.stringify(local));   
         }
     }, []);
 
