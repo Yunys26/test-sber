@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
+import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
 import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork(props) {
@@ -31,8 +31,10 @@ export default function ListWork(props) {
         if (localStorage.length !== 0) {
             dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
             return () => {
-                localStorage.getItem('local', JSON.stringify(local));   
+                localStorage.getItem('local', JSON.stringify(local));
             }
+        } else if (localStorage.length >= 20) {
+            dispatch(openAndCloseModal(true))
         }
     }, []);
 
