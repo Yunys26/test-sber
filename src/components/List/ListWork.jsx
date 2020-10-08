@@ -20,7 +20,7 @@ import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork(props) {
 
-    const { classes, data, funcLogic, statusList } = props;
+    const { classes, data, statusList } = props;
 
     const dispatch = useDispatch();
 
@@ -86,5 +86,4 @@ ListWork.propTypes = {
     classes: PropTypes.object,
     data: PropTypes.array,
     statusList: PropTypes.object,
-    funcLogic: PropTypes.func,
 }

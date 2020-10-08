@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Libs
 import {
     Typography,
@@ -11,21 +11,25 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
+import { deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
+import { updateLocalStorageAndStoreFavorit } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListFavorite(props) {
 
-    const { classes, funcLogic, statusListFavorit } = props;
+    const { classes, statusListFavorit } = props;
 
     const local = useSelector(state => state.main.localStorageStore);
+
+    const dispatch = useDispatch();
 
     return (
         <div>
             {
-                local.length === 0 && statusListFavorit || Object.values(...local).map((el) => 
+                Object.keys(local[0]).length === 0 && statusListFavorit || Object.values(...local).map((el) => 
                     <Box className={classes.blockContent}>
                         <Box className={classes.workBlock} boxShadow={4} id={el.id} >
                             
@@ -44,7 +48,8 @@ export default function ListFavorite(props) {
                                     <CssBaseline/>
                                         <IconButton
                                             style={{color: "#f50057"}} 
-                                            className={classes.likeBlack} 
+                                            className={classes.likeBlack}
+                                            onClick={() => dispatch(deleteWorkInLocalStorageStore(updateLocalStorageAndStoreFavorit(el.id, local)))}
                                         >
                                             <FavoriteIcon className={classes.likeBlack} />
                                         </IconButton>
@@ -57,11 +62,11 @@ export default function ListFavorite(props) {
                             <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
                             <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
                             <ThemeProvider theme={themeTabs}>
-                            <CssBaseline/>
+                                <CssBaseline/>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.how_to_apply }}></div>
                             </ThemeProvider>
-                            <Typography className={classes.footerSearchBlock} variant="h6">{local.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
+                            <Typography className={classes.footerSearchBlock} variant="h6">{el.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
                         
                         </Box>
                         
@@ -74,6 +79,5 @@ export default function ListFavorite(props) {
 
 ListFavorite.propTypes = {
     classes: PropTypes.object,
-    funcLogic: PropTypes.func,
     statusListFavorit: PropTypes.object,
 }

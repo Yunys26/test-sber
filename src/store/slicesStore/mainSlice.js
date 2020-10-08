@@ -1,6 +1,5 @@
 // Libs
-import axios from "axios";
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { responseDataWork } from './middleWareMainSlice';
 
 // Создане ветви хранилища
@@ -17,10 +16,12 @@ const mainSlice = createSlice({
     reducers: {
         showListLocalStorage: (state, action) => {
             state.localStorageStore = action.payload;
-            console.log(state.localStorageStore)
+            // console.log(state.localStorageStore)
         },
         deleteWorkInLocalStorageStore: (state, action) => {
-            state.localStorageStore = action.payload;
+            state.localStorageStore = [JSON.parse(action.payload)];
+            console.log(action.payload);
+            console.log(state.localStorageStore);
         },
         openAndCloseModal: (state, action) => {
             state.modalState = action.payload;

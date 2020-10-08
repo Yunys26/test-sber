@@ -22,7 +22,7 @@ import { showLocalStorage } from '../../store/slicesStore/middleWareMainSlice';
     
 
 export default function TabsBlock(props) {
-    
+
     // Стили
     const classes = useTabsBlockStyle();
 

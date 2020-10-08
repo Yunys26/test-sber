@@ -41,3 +41,12 @@ export const showLocalStorage = () => {
     }
     return arrayLocalStorage;
 };
+
+
+export const updateLocalStorageAndStoreFavorit = (id, local) => {
+    const [ arr ] = local
+    const  newLocalStore = {...arr};
+    delete newLocalStore[id];
+    localStorage.setItem('local', JSON.stringify(newLocalStore))
+    return JSON.stringify(newLocalStore)
+}
