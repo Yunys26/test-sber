@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React from 'react';
 // Libs
 import {
     Typography,
@@ -11,38 +11,21 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
 
 export default function ListFavorite(props) {
 
-    const { classes, data, funcLogic, statusListFavorit } = props;
-
-    const dispatch = useDispatch();
+    const { classes, funcLogic, statusListFavorit } = props;
 
     const local = useSelector(state => state.main.localStorageStore);
 
-    const handleClick = (index) => {
-        (localStorage.length <= 3 && funcLogic(index)) 
-        || 
-        (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
-    };
-
-    React.useEffect(() => {
-        console.log(1)
-        dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
-        return () => {
-            localStorage.getItem('local', JSON.stringify(local));   
-        }
-    }, []);
-
     return (
         <div>
-            {/* {
-                data.length === 0 && statusListFavorit || data.map(( el, index ) => 
+            {
+                local.length === 0 && statusListFavorit || Object.values(...local).map((el) => 
                     <Box className={classes.blockContent}>
                         <Box className={classes.workBlock} boxShadow={4} id={el.id} >
                             
@@ -62,8 +45,7 @@ export default function ListFavorite(props) {
                                         <IconButton
                                             style={{color: "#f50057"}} 
                                             className={classes.likeBlack} 
-                                            onClick={() => handleClick(index)}
-                                            >
+                                        >
                                             <FavoriteIcon className={classes.likeBlack} />
                                         </IconButton>
                                     </ThemeProvider>
@@ -79,20 +61,19 @@ export default function ListFavorite(props) {
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.how_to_apply }}></div>
                             </ThemeProvider>
-                            <Typography className={classes.footerSearchBlock} variant="h6">{data.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
+                            <Typography className={classes.footerSearchBlock} variant="h6">{local.length !== 1 && moment(el.created_at).format('LLLL')}</Typography>
                         
                         </Box>
                         
                     </Box>
                 )
-            } */}
+            }
         </div>
     )
 }
 
 ListFavorite.propTypes = {
     classes: PropTypes.object,
-    data: PropTypes.array,
     funcLogic: PropTypes.func,
     statusListFavorit: PropTypes.object,
 }

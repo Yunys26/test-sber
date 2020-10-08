@@ -33,11 +33,11 @@ export const addAndDelLocal = (id, index, data, local) => {
     return result;
 }
 
-export const asd = (id, data) => {
-    let ds = null;
-    for (let i = 0; i < data.length; i++) {
-        if (id === data[i].id) {
-            // должны переприсвоить эти данные и обновить хранилище работы
-        }
+// Копирование localStorage в массив для хранения в хранилище 
+export const showLocalStorage = () => {
+    let arrayLocalStorage = [];
+    if (localStorage.length !== 0) {
+            arrayLocalStorage.push(JSON.parse(localStorage.getItem('local')));
     }
-}
+    return arrayLocalStorage;
+};

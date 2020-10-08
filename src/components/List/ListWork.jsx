@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Libs
 import {
     Typography,
@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
+import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
 import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork(props) {
@@ -26,30 +26,15 @@ export default function ListWork(props) {
 
     const local = useSelector(state => state.main.localStorageStore);
 
-    const handleClick = (index) => {
-        (localStorage.length <= 3 && funcLogic(index)) 
-        || 
-        (localStorage.length > 3 && dispatch(openAndCloseModal(true)))
-    };
-
-    React.useEffect(() => {
-        const sss = (arr) => {
-            for(let i = 0; i < arr.length; i++) {
-
+    // Обновление хранилища localStorageStore
+    useEffect(() => {
+        if (localStorage.length !== 0) {
+            dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
+            return () => {
+                localStorage.getItem('local', JSON.stringify(local));   
             }
         }
-        if (Object.keys(local).length !== 0) {
-            // data.map( (el) => {} )
-            console.log()
-            console.log(Object.keys(local)[0])
-        }
-        // Object.keys(local).length === null && console.log(Object.keys(local))
-        // console.log(Object.keys(local).length)
-        // // return () => {
-        // // }
-    }, [local])
-
-
+    }, []);
 
     return (
         <div>
@@ -66,11 +51,9 @@ export default function ListWork(props) {
                                 <CssBaseline/>
                                     <IconButton
                                         id={el.dataDescription.id}
-                                        style={{color: el.dataDescription.color && "black"}}
+                                        style={{color: local[el.id] && "#f50057"} || null}
                                         className={classes.likeBlack} 
                                         onClick={() => {
-                                            // handleClick(index);
-                                            // handleClick(el.dataDescription.id)
                                             dispatch(showListLocalStorage(addAndDelLocal(el.dataDescription.id, index, data, local)));
                                         }}>
                                         <FavoriteIcon className={classes.likeBlack} />

@@ -13,54 +13,28 @@ import {
 // Theme
 import { themeTabs, useTabsBlockStyle } from './tabsBlockTheme';
 // Store action
-import { showListLocalStorage, deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
+import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
 // Components
 import ListWork from '../List/ListWork';
 import ModalS from '../Modal/Modal';
 import ListFavorite from '../List/ListFavorite';
+import { showLocalStorage } from '../../store/slicesStore/middleWareMainSlice';
     
 
 export default function TabsBlock(props) {
+    
+    // Стили
+    const classes = useTabsBlockStyle();
 
-    const { inputValue, setInputValue } = props;
-
-    const favoritesWorkList = useSelector(state => state.main.localStorageStore);
+    const { setInputValue } = props;
 
     const modalStateStore = useSelector(state => state.main.modalState);
 
     const data = useSelector(state => state.main.dataResponse);
 
-    const classes = useTabsBlockStyle();
-
     const dispatch = useDispatch();
 
     const [valueIndexOne, setValueIndexOne] = useState(0);
-    // Добавление/Удаление в избранное в tab work
-    const addAndDelInFavorite = (index) => {
-        for (let i = 0; i < localStorage.length; i++) {
-            if (localStorage.key(i) === `${inputValue}?${index}`) {
-                return localStorage.removeItem(localStorage.key(i));
-            }
-        }
-        localStorage.setItem(`${inputValue}?${index}`, JSON.stringify(data[index]));
-    };
-
-    // Копирование localStorage в массив для хранения в хранилище 
-    const showLocalStorage = () => {
-        let arrayLocalStorage = [];
-        if (localStorage.length !== 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                arrayLocalStorage.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-            }
-        }
-        return arrayLocalStorage;
-    };
-    
-    // Удаление из localStorage и хранилища 
-    const deleteStoreAndLocalStorage = (index) => {
-        localStorage.removeItem(localStorage.key(index));
-        dispatch(deleteWorkInLocalStorageStore(favoritesWorkList.filter(data => data.id !== favoritesWorkList[index].id)));
-    };
 
     // Логика работы Tabs
     const tabsIndexOne = () => {
@@ -98,7 +72,6 @@ export default function TabsBlock(props) {
                     <ListWork
                         classes={classes}
                         data={data}
-                        funcLogic={addAndDelInFavorite}
                         statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
                     />
                 }
@@ -107,8 +80,6 @@ export default function TabsBlock(props) {
                 {data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center">{el.status}</Typography>) ||
                     <ListFavorite
                         classes={classes}
-                        data={favoritesWorkList}
-                        funcLogic={deleteStoreAndLocalStorage}
                         statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
                     />
                 }
@@ -120,6 +91,5 @@ export default function TabsBlock(props) {
 }
 
 TabsBlock.propTypes = {
-    inputValue: PropTypes.string,
     setInputValue: PropTypes.func,
 }
