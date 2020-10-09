@@ -8,13 +8,11 @@ import { useStyles } from './ModalTheme';
 //  Store slice
 import { openAndCloseModal } from '../../store/slicesStore/mainSlice';
 
-export default function ModalS(props) {
+export default function ModalS({ open }) {
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
-
-    const { open } = props;
     
     return (
         <Modal

@@ -7,11 +7,10 @@ import {
     Tabs,
     Tab,
     Paper,
-    ThemeProvider,
     Typography
 } from '@material-ui/core';
 // Theme
-import { themeTabs, useTabsBlockStyle } from './tabsBlockTheme';
+import { useTabsBlockStyle } from './tabsBlockTheme';
 // Store action
 import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
 // Components
@@ -21,16 +20,16 @@ import ListFavorite from '../List/ListFavorite';
 import { showLocalStorage } from '../../store/slicesStore/middleWareMainSlice';
     
 
-export default function TabsBlock(props) {
+export default function TabsBlock({ setInputValue }) {
 
     // Стили
     const classes = useTabsBlockStyle();
 
-    const { setInputValue } = props;
-
     const modalStateStore = useSelector(state => state.main.modalState);
 
     const data = useSelector(state => state.main.dataResponse);
+
+    const local = useSelector(state => state.main.localStorageStore);
 
     const dispatch = useDispatch();
 
@@ -45,17 +44,13 @@ export default function TabsBlock(props) {
         <>
             <Paper className={classes.paperTabs} square>
                 <Tabs
-                    indicatorColor="secondary"
-                    textColor="secondary"
                     centered
                     onClick={() => tabsIndexOne()}
                     value={valueIndexOne}
                 >
-                    <ThemeProvider theme={themeTabs}>
-                        <NavLink className={classes.tabNavLink} to="/">
-                            <Tab label="Work" value={0}/>
-                        </NavLink>
-                    </ThemeProvider>
+                    <NavLink className={classes.tabNavLink} to="/">
+                        <Tab  label="Work" value={0}/>
+                    </NavLink>
                     <NavLink 
                         onClick={() => {
                             dispatch(showListLocalStorage(showLocalStorage()));
@@ -68,19 +63,21 @@ export default function TabsBlock(props) {
                 </Tabs>
             </Paper>
             <Route exact path="/">
-                {data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center">{el.status}</Typography>) ||
+                { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={0}>{el.status}</Typography>)) ||
                     <ListWork
                         classes={classes}
                         data={data}
                         statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
+                        local={local}
                     />
                 }
             </Route>
             <Route path="/work">
-                {data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center">{el.status}</Typography>) ||
+                { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={1}>{el.status}</Typography>)) ||
                     <ListFavorite
                         classes={classes}
                         statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
+                        local={local}
                     />
                 }
             </Route>

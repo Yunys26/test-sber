@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // Libs
 import {
     Typography,
@@ -11,27 +11,23 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
 import { deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
 import { updateLocalStorageAndStoreFavorit } from '../../store/slicesStore/middleWareMainSlice';
 
-export default function ListFavorite(props) {
-
-    const { classes, statusListFavorit } = props;
-
-    const local = useSelector(state => state.main.localStorageStore);
+export default function ListFavorite({ classes, statusListFavorit, local }) {
 
     const dispatch = useDispatch();
-
+    
     return (
         <div>
             {
-                Object.keys(local[0]).length === 0 && statusListFavorit || Object.values(...local).map((el) => 
-                    <Box className={classes.blockContent}>
-                        <Box className={classes.workBlock} boxShadow={4} id={el.id} >
+                (Object.keys(local[0] || {}).length === 0 && statusListFavorit) || Object.values(...local || {}).map((el) => 
+                    <Box className={classes.blockContent} key={el.id}>
+                        <Box className={classes.workBlock} boxShadow={4}>
                             
                             <Grid 
                                 container 
@@ -80,4 +76,5 @@ export default function ListFavorite(props) {
 ListFavorite.propTypes = {
     classes: PropTypes.object,
     statusListFavorit: PropTypes.object,
+    local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }

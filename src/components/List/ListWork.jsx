@@ -11,20 +11,16 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
 import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
 import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
-export default function ListWork(props) {
-
-    const { classes, data, statusList } = props;
+export default function ListWork({ classes, data, statusList, local }) {;
 
     const dispatch = useDispatch();
-
-    const local = useSelector(state => state.main.localStorageStore);
 
     // Обновление хранилища localStorageStore
     useEffect(() => {
@@ -36,17 +32,25 @@ export default function ListWork(props) {
         } else if (localStorage.length >= 20) {
             dispatch(openAndCloseModal(true))
         }
-    }, []);
-
+    },[]);
+    
     return (
         <div>
             {
-                data.length === 0 && statusList || data.map((el, index) =>
-                    <Box className={classes.blockContent}>
+                (data.length === 0 && statusList) || data.map((el, index) =>
+                    <Box className={classes.blockContent} key={el.id}>
 
-                        <Box className={classes.workBlock} boxShadow={4} id={index} >
+                        <Box className={classes.workBlock} boxShadow={4}>
                         
-                            <Grid container item={true} className={classes.titleSearchBlock} xs={12} direction="row" justify="space-between" alignItems="center">
+                            <Grid 
+                                container 
+                                item={true} 
+                                className={classes.titleSearchBlock} 
+                                xs={12} 
+                                direction="row" 
+                                justify="space-between" 
+                                alignItems="center"
+                            >
                                 <Typography className={classes.nameCompany} variant="h3">{el.dataDescription.company}</Typography>
                                 {(el.dataDescription.company_logo !== null && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt=""></img>) || null}
                                 <ThemeProvider theme={themeSearchBlock}>
@@ -88,4 +92,5 @@ ListWork.propTypes = {
     classes: PropTypes.object,
     data: PropTypes.array,
     statusList: PropTypes.object,
+    local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
