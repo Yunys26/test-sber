@@ -16,7 +16,7 @@ import { themeSearchBlock, useSearchBlockStyles } from './mainBlockTheme';
 // Components
 import TabsBlock from '../TabsBlock/TabsBlock';
 
-function Main(props) {
+export default function Main(props) {
 
     const dispatch = useDispatch();
 
@@ -53,5 +53,3 @@ function Main(props) {
         </Box>
     )
 }
-
-export default Main;

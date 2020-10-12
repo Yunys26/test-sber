@@ -1,41 +1,50 @@
 import React from 'react';
-import { unmountComponentAtNode } from "react-dom";
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import ModalS from './Modal';
-import { Provider } from 'react-redux';
-import { store } from '../../store/store';
-
-
 
 describe('<Modal />', () => {
+
     let props, componentModal; 
 
     beforeEach(() => {
 
         props = {
-            open: false,
+            open: true,
         };
 
-        componentModal = shallow(<Provider store={store}><ModalS {...props}/></Provider>)
+        componentModal = shallow(<ModalS {...props} />)
     });
 
-    it("Проверка на рендер компонента", () => {
-        expect(componentModal).toBeTruthy();
-    });
+    describe('Содержимое <Modal /> ', () => {
 
-    it('нажатие кнопки "Удалить все"', () => {
-        componentModal.find('button').simulate('click');
-        expect()
-    });
+        it("Проверка на рендер компонента", () => {
+            expect(componentModal.length).toBe(1);
+        });
 
-    // it('нажатие кнопки "Ок"', () => {
-    //     componentModal.find('button').simulate('click');
-    //     expect()
-    // });
+        it('Проверка состояния моадльного окна', () => {
+            expect(componentModal.props().open).toEqual(true)
+        });
+    
+        it('Проверка на кол-во обязательных кнопок', () => {
+            expect(componentModal.find("button")).toHaveLength(2);
+        });
         
-    it('render initial', () => {
-        expect(componentModal.find('button')) // .find + поиск по имени компонента
-        expect(componentModal.find('h2'))
+        it('Проверка текста в кнопках',() => {
+            expect(componentModal.find("button").at(0).text()).toEqual('Ок');
+            expect(componentModal.find("button").at(1).text()).toEqual('Удалить все избранное');
+        });
+    
+        it('Проверка на наличие заголовока', () => {
+            expect(componentModal.find("h2")).toHaveLength(1);
+        });
+
     });
+
+    // describe('Логика <Modal />', () => {
+    //     it('Закрытие модального окна', () => {
+    //         const buttotOk = componentModal.find('button').at(0);
+    //         buttotOk.simulate('click');
+    //     });
+    // });
 
 });
