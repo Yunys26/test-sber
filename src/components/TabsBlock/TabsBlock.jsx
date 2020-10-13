@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // Libs
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import {
     Tabs,
     Tab,
@@ -41,7 +41,7 @@ export default function TabsBlock({ setInputValue }) {
     };
 
     return (
-        <>
+        <div>
             <Paper className={classes.paperTabs} square>
                 <Tabs
                     centered
@@ -62,28 +62,30 @@ export default function TabsBlock({ setInputValue }) {
                     </NavLink>
                 </Tabs>
             </Paper>
-            <Route exact path="/">
-                { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={0}>{el.status}</Typography>)) ||
-                    <ListWork
-                        classes={classes}
-                        data={data}
-                        statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
-                        local={local}
-                    />
-                }
-            </Route>
-            <Route path="/work">
-                { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={1}>{el.status}</Typography>)) ||
-                    <ListFavorite
-                        classes={classes}
-                        statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
-                        local={local}
-                    />
-                }
-            </Route>
+            <Switch>
+                <Route exact path="/">
+                    { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={0}>{el.status}</Typography>)) ||
+                        <ListWork
+                            classes={classes}
+                            data={data}
+                            statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
+                            local={local}
+                        />
+                    }
+                </Route>
+                <Route path="/work">
+                    { (data.length === 1 && data.map( (el) => <Typography className={classes.statusLoadingText} variant="h2" align="center" key={1}>{el.status}</Typography>)) ||
+                        <ListFavorite
+                            classes={classes}
+                            statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
+                            local={local}
+                        />
+                    }
+                </Route>
+            </Switch>
             
             {modalStateStore && <ModalS open={modalStateStore} />}
-        </>
+        </div>
     )
 }
 

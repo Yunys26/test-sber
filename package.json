@@ -29,6 +29,9 @@
     "eject": "react-scripts eject",
     "server": "nodemon src/server"
   },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
+  },
   "proxy": "http://localhost:9999",
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +51,7 @@
   "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "nodemon": "^2.0.4"
   }
 }

@@ -88,9 +88,9 @@ export default function ListWork({ classes, data, statusList, local }) {;
     )
 }
 
-ListWork.propTypes = {
-    classes: PropTypes.object,
-    data: PropTypes.array,
-    statusList: PropTypes.object,
-    local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-}
+// ListWork.propTypes = {
+//     classes: PropTypes.object,
+//     data: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+//     statusList: PropTypes.object,
+//     local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+// }

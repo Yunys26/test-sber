@@ -1,24 +1,51 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import Main from './Main';
-import { Provider, useDispatch } from 'react-redux';
-import { store } from '../../store/store';
+import { Button, Input } from '@material-ui/core';
+import TabsBlock from '../TabsBlock/TabsBlock';
+
+
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn()
+//   useSelector: () => jest.fn()
+}));
 
 describe('<Main />', () => {
+    
+    let componentMain = shallow(<Main />)
 
-    let componentMain;
+    afterEach( () => {
+        jest.clearAllMocks();
+    })
 
-    beforeEach(() => {
-
-        // const dispatch = useDispatch();
-
-        componentMain = shallow(<Provider store={store}><Main /></Provider>)
+    it("Snapshot Main", () => {
+        expect(componentMain).toMatchSnapshot();
     });
 
-    it('Проверка рендера компонента', ()=> {
-        const main = componentMain.find('Main');
-        expect(main.find('button')).toHaveLength(1);
+    it("Проверка на рендер компонента", () => {
         expect(componentMain.length).toBe(1);
+    });
+
+    it("Проверка на наличие Input", () => {
+        expect(componentMain.find(Input)).toHaveLength(1);
+    });
+
+    it("Логика Input", () => {
+        const input = componentMain.find(Input);
+        input.simulate('onChange', {target: { value: 'java'}});
+    });
+
+    it('Проверка на наличии кнопки', () => {
+        expect(componentMain.find(Button)).toHaveLength(1)
+    });
+
+    it('Проверка на наличиt текста', () => {
+        expect(componentMain.find(Button).at(0).text()).toEqual('Search Work');
+    });
+
+    it('Проверка на наличие <TabsBlock />', () => {
+        expect(componentMain.find(TabsBlock)).toHaveLength(1);
     });
 
 });

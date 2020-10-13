@@ -1,6 +1,12 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import ModalS from './Modal';
+import { Button } from '@material-ui/core';
+
+// Мокаем useDispatch
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn()
+}));
 
 describe('<Modal />', () => {
 
@@ -15,7 +21,16 @@ describe('<Modal />', () => {
         componentModal = shallow(<ModalS {...props} />)
     });
 
+    afterEach(() => {
+        props, componentModal = undefined
+        
+    })
+
     describe('Содержимое <Modal /> ', () => {
+
+        it("Snapshot Modal", () => {
+            expect(componentModal).toMatchSnapshot();
+        });
 
         it("Проверка на рендер компонента", () => {
             expect(componentModal.length).toBe(1);
@@ -26,12 +41,12 @@ describe('<Modal />', () => {
         });
     
         it('Проверка на кол-во обязательных кнопок', () => {
-            expect(componentModal.find("button")).toHaveLength(2);
+            expect(componentModal.find(Button)).toHaveLength(2);
         });
         
         it('Проверка текста в кнопках',() => {
-            expect(componentModal.find("button").at(0).text()).toEqual('Ок');
-            expect(componentModal.find("button").at(1).text()).toEqual('Удалить все избранное');
+            expect(componentModal.find(Button).at(0).text()).toEqual('Ок');
+            expect(componentModal.find(Button).at(1).text()).toEqual('Удалить все избранное');
         });
     
         it('Проверка на наличие заголовока', () => {
@@ -40,11 +55,13 @@ describe('<Modal />', () => {
 
     });
 
-    // describe('Логика <Modal />', () => {
-    //     it('Закрытие модального окна', () => {
-    //         const buttotOk = componentModal.find('button').at(0);
-    //         buttotOk.simulate('click');
-    //     });
-    // });
+    describe('Логика <Modal />', () => {
+
+        it('Закрытие модального окна при нажатии на кнопку Ок', () => {
+            const buttotOk = componentModal.find(Button).at(0);
+            buttotOk.simulate('click', { ...props, open: false});
+        });
+        
+    });
 
 });
