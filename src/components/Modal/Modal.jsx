@@ -22,9 +22,7 @@ export default function ModalS({ open }) {
             open={open}
             onClose={() => dispatch(openAndCloseModal(false))}
             closeAfterTransition
-            BackdropProps={{
-                timeout: 500,
-            }}
+            BackdropProps={{timeout: 500}}
         >
             <Fade in={open}>
                 <div className={classes.paper}>
@@ -32,12 +30,16 @@ export default function ModalS({ open }) {
                     <p id="spring-modal-description"><b>Maximum limit reached</b></p>
                     <div className={classes.footerButton}>
                         <Button onClick={() => dispatch(openAndCloseModal(false))}>Ок</Button>
-                        <Button className={classes.buttonLastModal} variant="outlined" color="secondary" onClick={() => {
-                            localStorage.clear();
-                            dispatch(openAndCloseModal(false));
-                        }}
+                        <Button 
+                            className={classes.buttonLastModal} 
+                            variant="outlined" 
+                            color="secondary" 
+                            onClick={() => {
+                                localStorage.clear();
+                                dispatch(openAndCloseModal(false));
+                            }}
                         >
-                            <b>Удалить все избранное</b>
+                            <b>Delete all favorites</b>
                         </Button>
                     </div>
                 </div>

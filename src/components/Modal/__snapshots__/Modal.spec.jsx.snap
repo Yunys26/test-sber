@@ -47,7 +47,7 @@ exports[`<Modal /> Содержимое <Modal />  Snapshot Modal 1`] = `
           variant="outlined"
         >
           <b>
-            Удалить все избранное
+            Delete all favorites
           </b>
         </WithStyles(ForwardRef(Button))>
       </div>

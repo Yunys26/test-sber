@@ -49,7 +49,7 @@ describe('<Modal />', () => {
         });
 
         it('Проверка текста в кнопке 2' ,() => {
-            expect(componentModal.find(Button).at(1).text()).toEqual('Удалить все избранное');
+            expect(componentModal.find(Button).at(1).text()).toEqual('Delete all favorites');
         });
     
         it('Проверка на наличие заголовока', () => {

@@ -13,9 +13,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 // Theme
-import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
 import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
+
 import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork({ classes, data, statusList, local }) {;
@@ -53,20 +53,17 @@ export default function ListWork({ classes, data, statusList, local }) {;
                             >
                                 <Typography className={classes.nameCompany} variant="h3">{el.dataDescription.company}</Typography>
                                 {(el.dataDescription.company_logo !== null && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt=""></img>) || null}
-                                <ThemeProvider theme={themeSearchBlock}>
-                                <CssBaseline/>
-                                    <IconButton
-                                        id={el.dataDescription.id}
-                                        style={{color: local[el.id] && "#f50057"} || null}
-                                        className={classes.likeBlack} 
-                                        onClick={() => {
-                                            dispatch(showListLocalStorage(addAndDelLocal(el.dataDescription.id, index, data, local)));
-                                        }}>
-                                        <FavoriteIcon className={classes.likeBlack} />
-                                    </IconButton>
-                                </ThemeProvider>
+                                <IconButton
+                                    id={el.dataDescription.id}
+                                    style={{color: local[el.id] && "#f50057"} || null}
+                                    className={classes.likeBlack} 
+                                    onClick={() => {
+                                        dispatch(showListLocalStorage(addAndDelLocal(el.dataDescription.id, index, data, local)));
+                                    }}>
+                                    <FavoriteIcon className={classes.likeBlack} />
+                                </IconButton>
+
                             </Grid>
-                            
                             <Typography variant="h5"><b>Title:</b> {el.dataDescription.title}</Typography>
                             <Typography variant="h5"><b>Company:</b> {el.dataDescription.company}</Typography>
                             <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>

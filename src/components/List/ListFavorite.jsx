@@ -13,9 +13,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 // Theme
-import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
 import { deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice';
+
 import { updateLocalStorageAndStoreFavorit } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListFavorite({ classes, statusListFavorit, local }) {
@@ -37,19 +37,16 @@ export default function ListFavorite({ classes, statusListFavorit, local }) {
                                 direction="row" 
                                 justify="space-between" 
                                 alignItems="center"
+                            >
+                                <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
+                                {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
+                                <IconButton
+                                    style={{color: "#f50057"}} 
+                                    className={classes.likeBlack}
+                                    onClick={() => dispatch(deleteWorkInLocalStorageStore(updateLocalStorageAndStoreFavorit(el.id, local)))}
                                 >
-                                    <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
-                                    {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
-                                    <ThemeProvider theme={themeSearchBlock}>
-                                    <CssBaseline/>
-                                        <IconButton
-                                            style={{color: "#f50057"}} 
-                                            className={classes.likeBlack}
-                                            onClick={() => dispatch(deleteWorkInLocalStorageStore(updateLocalStorageAndStoreFavorit(el.id, local)))}
-                                        >
-                                            <FavoriteIcon className={classes.likeBlack} />
-                                        </IconButton>
-                                    </ThemeProvider>
+                                    <FavoriteIcon className={classes.likeBlack} />
+                                </IconButton>
                             </Grid>
                             
                             <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
