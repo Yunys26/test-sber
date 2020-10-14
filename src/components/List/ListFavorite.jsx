@@ -39,7 +39,7 @@ export default function ListFavorite({ classes, statusListFavorit, local }) {
                                 alignItems="center"
                             >
                                 <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
-                                {(el.company_logo !== null && <img className={classes.workBlockLogo} src={el.company_logo} alt=""></img>) || null}
+                                {el.dataDescription.company_logo && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt="Logo Company"></img>}
                                 <IconButton
                                     style={{color: "#f50057"}} 
                                     className={classes.likeBlack}
@@ -49,11 +49,11 @@ export default function ListFavorite({ classes, statusListFavorit, local }) {
                                 </IconButton>
                             </Grid>
                             
-                            <Typography variant="h5"><b>Title:</b> {el.title}</Typography>
-                            <Typography variant="h5"><b>Company:</b> {el.company}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
-                            <Typography variant="h5"><b>Type:</b> {el.type}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.location}</Typography>
+                            <h5><b>Title:</b> {el.title}</h5>
+                            <h5><b>Company:</b> {el.company}</h5>
+                            <h5><b>Location:</b> {el.location}</h5>
+                            <h5><b>Type:</b> {el.type}</h5>
+                            <h5><b>Location:</b> {el.location}</h5>
                             <ThemeProvider theme={themeTabs}>
                                 <CssBaseline/>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>

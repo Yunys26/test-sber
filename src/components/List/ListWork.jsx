@@ -14,9 +14,9 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 // Theme
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';
-import { openAndCloseModal, showListLocalStorage } from '../../store/slicesStore/mainSlice';
+import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
 
-import { addAndDelLocal } from '../../store/slicesStore/middleWareMainSlice';
+import { addAndDelLocal, updateEffectLocalStorageStore } from '../../store/slicesStore/middleWareMainSlice';
 
 export default function ListWork({ classes, data, statusList, local }) {;
 
@@ -24,14 +24,7 @@ export default function ListWork({ classes, data, statusList, local }) {;
 
     // Обновление хранилища localStorageStore
     useEffect(() => {
-        if (localStorage.length !== 0) {
-            dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
-            return () => {
-                localStorage.getItem('local', JSON.stringify(local));
-            }
-        } else if (localStorage.length >= 20) {
-            dispatch(openAndCloseModal(true))
-        }
+        updateEffectLocalStorageStore(local, dispatch);
     },[]);
     
     return (
@@ -52,7 +45,7 @@ export default function ListWork({ classes, data, statusList, local }) {;
                                 alignItems="center"
                             >
                                 <Typography className={classes.nameCompany} variant="h3">{el.dataDescription.company}</Typography>
-                                {(el.dataDescription.company_logo !== null && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt=""></img>) || null}
+                                {el.dataDescription.company_logo && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt="Logo Company"></img>}
                                 <IconButton
                                     id={el.dataDescription.id}
                                     style={{color: local[el.id] && "#f50057"} || null}
@@ -64,11 +57,11 @@ export default function ListWork({ classes, data, statusList, local }) {;
                                 </IconButton>
 
                             </Grid>
-                            <Typography variant="h5"><b>Title:</b> {el.dataDescription.title}</Typography>
-                            <Typography variant="h5"><b>Company:</b> {el.dataDescription.company}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
-                            <Typography variant="h5"><b>Type:</b> {el.dataDescription.type}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
+                            <h5><b>Title:</b> {el.title}</h5>
+                            <h5><b>Company:</b> {el.company}</h5>
+                            <h5><b>Location:</b> {el.location}</h5>
+                            <h5><b>Type:</b> {el.type}</h5>
+                            <h5><b>Location:</b> {el.location}</h5>
                             <ThemeProvider theme={themeTabs}>
                             <CssBaseline/>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.dataDescription.description }}></div>

@@ -1,28 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
-// Отправка запроса
-export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWorkStatus',
-    async (inputValue) => {
-        const response = await axios.get('http://localhost:9999/', {
-            params: {
-                input: inputValue,
-            }
-        })
-            .then(res => {
-                const result = res.data.map( (el) => (
-                    {
-                        id: el.id,
-                        dataDescription: {...el, favorite: false},
-                    }))
-                return result;
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        return response;
-    }
-);
+import { openAndCloseModal, showListLocalStorage } from "./mainSlice";
 
 export const addAndDelLocal = (id, index, data, local) => {
     const result = {
@@ -42,11 +19,21 @@ export const showLocalStorage = () => {
     return arrayLocalStorage;
 };
 
-
 export const updateLocalStorageAndStoreFavorit = (id, local) => {
     const [ arr ] = local
     const  newLocalStore = {...arr};
     delete newLocalStore[id];
     localStorage.setItem('local', JSON.stringify(newLocalStore))
     return JSON.stringify(newLocalStore)
+};
+
+export const updateEffectLocalStorageStore = (local, dispatch) => {
+    if (localStorage.length !== 0) {
+        dispatch(showListLocalStorage(JSON.parse(localStorage.getItem('local'))))
+        return () => {
+            localStorage.getItem('local', JSON.stringify(local));
+        }
+    } else if (localStorage.length >= 20) {
+        dispatch(openAndCloseModal(true))
+    }
 }

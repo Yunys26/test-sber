@@ -22,7 +22,7 @@ exports[`<ListWork /> Snapshot ListWork 1`] = `
           NS
         </WithStyles(ForwardRef(Typography))>
         <img
-          alt=""
+          alt="Logo Company"
           src="https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdUdMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9413d6855d50ab98787e3589f63491eacd6c7e0b/NS%20CB.jpg"
         />
         <WithStyles(ForwardRef(IconButton))
@@ -37,51 +37,36 @@ exports[`<ListWork /> Snapshot ListWork 1`] = `
           <FavoriteIcon />
         </WithStyles(ForwardRef(IconButton))>
       </WithStyles(ForwardRef(Grid))>
-      <WithStyles(ForwardRef(Typography))
-        variant="h5"
-      >
+      <h5>
         <b>
           Title:
         </b>
          
-        senior iOS developer NS App 
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        variant="h5"
-      >
+      </h5>
+      <h5>
         <b>
           Company:
         </b>
          
-        NS
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        variant="h5"
-      >
+      </h5>
+      <h5>
         <b>
           Location:
         </b>
          
-        Utrecht
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        variant="h5"
-      >
+      </h5>
+      <h5>
         <b>
           Type:
         </b>
          
-        Full Time
-      </WithStyles(ForwardRef(Typography))>
-      <WithStyles(ForwardRef(Typography))
-        variant="h5"
-      >
+      </h5>
+      <h5>
         <b>
           Location:
         </b>
          
-        Utrecht
-      </WithStyles(ForwardRef(Typography))>
+      </h5>
       <ThemeProvider
         theme={
           Object {

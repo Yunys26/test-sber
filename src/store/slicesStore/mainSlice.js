@@ -1,6 +1,25 @@
 // Libs
 import { createSlice } from '@reduxjs/toolkit';
-import { responseDataWork } from './middleWareMainSlice';
+// import { responseDataWork } from './middleWareMainSlice';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const responseDataWork = createAsyncThunk('mainSliceBlock/responseDataWorkStatus',
+    async (inputValue) => {
+        const response = await axios.get('http://localhost:9999/', {
+            params: {
+                input: inputValue,
+            }
+        })
+        const result = response.data.map( (el) => (
+            {
+                id: el.id,
+                dataDescription: {...el, favorite: false},
+            }
+        ))
+        return result;
+    }
+);
 
 // Создане ветви хранилища
 const mainSlice = createSlice({

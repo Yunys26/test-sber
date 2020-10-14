@@ -10,11 +10,12 @@ import {
     ThemeProvider,
 } from '@material-ui/core';
 // Store slice
-import { responseDataWork } from '../../store/slicesStore/middleWareMainSlice';
+// import { responseDataWork } from '../../store/slicesStore/middleWareMainSlice';
 // Theme
 import { themeSearchBlock, useSearchBlockStyles } from './mainBlockTheme';
 // Components
 import TabsBlock from '../TabsBlock/TabsBlock';
+import { responseDataWork } from '../../store/slicesStore/mainSlice';
 
 export default function Main(props) {
 
