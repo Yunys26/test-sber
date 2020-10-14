@@ -11,7 +11,7 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Theme
 import { themeSearchBlock } from '../MainBlock/mainBlockTheme';
 import { themeTabs } from '../TabsBlock/tabsBlockTheme';

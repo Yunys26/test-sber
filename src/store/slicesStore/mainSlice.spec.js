@@ -1,21 +1,6 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { deleteWorkInLocalStorageStore, openAndCloseModal } from './mainSlice';
-import { createSlice } from '@reduxjs/toolkit';
+import { deleteWorkInLocalStorageStore, openAndCloseModal, showListLocalStorage } from './mainSlice';
 
-const initialState = {
-    dataResponse: [],
-    localStorageStore: [],
-    modalState: false,
-}
-
-const data = [
-    {id: 'dnvj123-123n!/sa['},
-    {id: 'dnvj123-123n1l2213,/12-'},
-    {id: 'dnvj123-123n/12n??1'},
-];
-
-const state = {
+const localDataOne = {
     company: "NS",
     company_logo: "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdUdMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9413d6855d50ab98787e3589f63491eacd6c7e0b/NS%20CB.jpg",
     company_url: "http://www.ns.nl",
@@ -30,17 +15,49 @@ const state = {
     url: "https://jobs.github.com/positions/65197190-0116-414a-9406-ae150edccb57",
 };
 
+const localDataTwo = {
+    company: "Redbrick",
+    company_logo: "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTZMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bfcf8205463e2bed0526f9ae61be3cd93d70e210/rdbrck-wordmark.png",
+    company_url: "https://rdbrck.com/",
+    created_at: "Thu Oct 08 20:48:37 UTC 2020",
+    description: "Redbrick is the parent organization of a portfolio of disruptive digital companies.",
+    favorite: false,
+    how_to_apply: "Please apply to the job link here",
+    id: "aaa7101b-6d63-4887-9e0c-1f2989c3cb36",
+    location: "Victoria, BC, Canada",
+    title: "Senior Application Developer",
+    type: "Full Time",
+    url: "https://jobs.github.com/positions/aaa7101b-6d63-4887-9e0c-1f2989c3cb36",
+};
+
+const initialState = {
+    dataResponse: [],
+    localStorageStore: [
+        {
+            id: "65197190-0116-414a-9406-ae150edccb57",
+            data: localDataOne
+        },
+        {
+            id: "aaa7101b-6d63-4887-9e0c-1f2989c3cb36",
+            data: localDataTwo
+        }
+    ],
+    modalState: false,
+}
 
 describe('Тестирование Redusers', () => {
     
-
-    // it('Reduser showListLocalStorage', () => {
-    //     expect(showListLocalStorage)
-    // });
+    it('Reduser showListLocalStorage', () => {
+        const action = showListLocalStorage([localDataOne, localDataTwo]);
+        expect({...initialState, dataResponse: action.payload}).toEqual({...initialState, dataResponse: action.payload})
+    });
 
     it('Reduser deleteWorkInLocalStorageStore', () => {
-        const action = deleteWorkInLocalStorageStore(JSON.stringify(state))
-        expect({initialState})
+        const [ arr ] = initialState.localStorageStore
+        const  newLocalStore = {...arr};
+        delete newLocalStore[localDataTwo.id];
+        const action = deleteWorkInLocalStorageStore(newLocalStore)
+        expect({...initialState, localStorageStore: action.payload}).toEqual({...initialState, localStorageStore: { id:localDataOne.id, data: localDataOne}});
     });
     
     it('Reduser openAndCloseModal', () => {

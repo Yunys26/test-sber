@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { shallow } from 'enzyme';
 import ListWork from './ListWork';
 
@@ -9,7 +9,7 @@ jest.mock('react-redux', () => ({
 }));
 
 describe('<ListWork />', () => {
-    let props, componentListWork, useEffect;
+    let props, componentListWork;
 
     beforeEach(() => {
 
@@ -18,20 +18,25 @@ describe('<ListWork />', () => {
             data: [
                 {
                     id: "65197190-0116-414a-9406-ae150edccb57",
-                    dataDescription: {}
+                    dataDescription: {
+                        company: "NS",
+                        company_logo: "https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdUdMIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9413d6855d50ab98787e3589f63491eacd6c7e0b/NS%20CB.jpg",
+                        company_url: "http://www.ns.nl",
+                        created_at: "Tue Oct 13 10:25:20 UTC 2020",
+                        description: "senior iOS developer NS App - Utrecht Utrecht",
+                        favorite: false,
+                        how_to_apply: "Solliciteer direct via de",
+                        id: "65197190-0116-414a-9406-ae150edccb57",
+                        location: "Utrecht",
+                        title: "senior iOS developer NS App ",
+                        type: "Full Time",
+                        url: "https://jobs.github.com/positions/65197190-0116-414a-9406-ae150edccb57",
+                    },
                 }
             ],
             statusList: {},
             local: [{}]
         };
-        // [{
-        //     id: "65197190-0116-414a-9406-ae150edccb57",
-        //     dataDescription: {
-
-        //     }
-        // }],
-
-        // useEffect = jest.spyOn(React, "useEffect").mockImplementation(f => f());
 
         componentListWork = shallow(<ListWork {...props} />)
     });
@@ -43,8 +48,9 @@ describe('<ListWork />', () => {
     it('Проверка на рендер <ListWork />', () => {
         expect(componentListWork.length).toBe(1);
     });
+    
+    it('Snapshot ListWork', () => {
+        expect(componentListWork).toMatchSnapshot();
+    });
 
-    it('123', () => {
-        console.log(componentListWork.props().data)
-    })
 })

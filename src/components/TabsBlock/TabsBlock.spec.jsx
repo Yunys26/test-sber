@@ -16,6 +16,7 @@ describe('<TabsBlock />', () => {
     beforeEach(() => {
 
         props = {
+            data: [],
             setInputValue: (state) => state
         }
 

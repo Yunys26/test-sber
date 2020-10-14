@@ -44,8 +44,11 @@ describe('<Modal />', () => {
             expect(componentModal.find(Button)).toHaveLength(2);
         });
         
-        it('Проверка текста в кнопках',() => {
+        it('Проверка текста в кнопке 1',() => {
             expect(componentModal.find(Button).at(0).text()).toEqual('Ок');
+        });
+
+        it('Проверка текста в кнопке 2' ,() => {
             expect(componentModal.find(Button).at(1).text()).toEqual('Удалить все избранное');
         });
     
@@ -59,7 +62,12 @@ describe('<Modal />', () => {
 
         it('Закрытие модального окна при нажатии на кнопку Ок', () => {
             const buttotOk = componentModal.find(Button).at(0);
-            buttotOk.simulate('click', { ...props, open: false});
+            buttotOk.simulate('click', { ...props, open: false});2
+        });
+
+        it('Закрытие модального окна при нажатии на кнопку Удалить все избранное', () => {
+            const buttotOk = componentModal.find(Button).at(0);
+            buttotOk.simulate('click', localStorage.clear());
         });
         
     });
