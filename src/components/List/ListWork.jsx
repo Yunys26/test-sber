@@ -31,7 +31,7 @@ export default function ListWork({ classes, data, statusList, local }) {;
         <div>
             {
                 (data.length === 0 && statusList) || data.map((el, index) =>
-                    <Box className={classes.blockContent} key={el.id}>
+                    <Box className={classes.blockContent} key={el.dataDescription.id}>
 
                         <Box className={classes.workBlock} boxShadow={4}>
                         
@@ -57,11 +57,12 @@ export default function ListWork({ classes, data, statusList, local }) {;
                                 </IconButton>
 
                             </Grid>
-                            <h5><b>Title:</b> {el.title}</h5>
-                            <h5><b>Company:</b> {el.company}</h5>
-                            <h5><b>Location:</b> {el.location}</h5>
-                            <h5><b>Type:</b> {el.type}</h5>
-                            <h5><b>Location:</b> {el.location}</h5>
+
+                            <Typography variant="h5"><b>Title:</b> {el.dataDescription.title}</Typography>
+                            <Typography variant="h5"><b>Company:</b> {el.dataDescription.company}</Typography>
+                            <Typography variant="h5"><b>Type:</b> {el.dataDescription.type}</Typography>
+                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
+
                             <ThemeProvider theme={themeTabs}>
                             <CssBaseline/>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.dataDescription.description }}></div>

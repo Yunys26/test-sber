@@ -21,11 +21,26 @@ import { updateLocalStorageAndStoreFavorit } from '../../store/slicesStore/middl
 export default function ListFavorite({ classes, statusListFavorit, local }) {
 
     const dispatch = useDispatch();
-    
+
+    console.log(Object.entries(...Object.values(...local)))
+
+    const showDataText = (temp) => {
+        let toDisplay = {
+            title: temp.title,
+            company: temp.company,
+            type: temp.type,
+            location: temp.location
+        };
+
+        return Object.entries(toDisplay).map(([key, value]) => (
+            <Typography variant="h5"><b style={{ textTransform: 'capitalize' }}>{key}</b> {value}</Typography>
+        ));
+    };
+
     return (
         <div>
             {
-                (Object.keys(local[0] || {}).length === 0 && statusListFavorit) || Object.values(...local || {}).map((el) => 
+                (Object.keys(local[0] || {}).length === 0 && statusListFavorit) || Object.values(...local || {}).map((el) =>
                     <Box className={classes.blockContent} key={el.id}>
                         <Box className={classes.workBlock} boxShadow={4}>
                             
@@ -39,7 +54,7 @@ export default function ListFavorite({ classes, statusListFavorit, local }) {
                                 alignItems="center"
                             >
                                 <Typography className={classes.nameCompany} variant="h3">{el.company}</Typography>
-                                {el.dataDescription.company_logo && <img className={classes.workBlockLogo} src={el.dataDescription.company_logo} alt="Logo Company"></img>}
+                                {el.company_logo && <img className={classes.workBlockLogo} src={el.company_logo} alt="Logo Company"></img>}
                                 <IconButton
                                     style={{color: "#f50057"}} 
                                     className={classes.likeBlack}
@@ -48,12 +63,9 @@ export default function ListFavorite({ classes, statusListFavorit, local }) {
                                     <FavoriteIcon className={classes.likeBlack} />
                                 </IconButton>
                             </Grid>
+
+                            { showDataText(el) }
                             
-                            <h5><b>Title:</b> {el.title}</h5>
-                            <h5><b>Company:</b> {el.company}</h5>
-                            <h5><b>Location:</b> {el.location}</h5>
-                            <h5><b>Type:</b> {el.type}</h5>
-                            <h5><b>Location:</b> {el.location}</h5>
                             <ThemeProvider theme={themeTabs}>
                                 <CssBaseline/>
                                 <div className={classes.descriptionBlock} dangerouslySetInnerHTML={{ __html: el.description }}></div>
