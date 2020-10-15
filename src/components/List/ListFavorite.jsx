@@ -18,24 +18,9 @@ import { deleteWorkInLocalStorageStore } from '../../store/slicesStore/mainSlice
 
 import { updateLocalStorageAndStoreFavorit } from '../../store/slicesStore/middleWareMainSlice';
 
-export default function ListFavorite({ classes, statusListFavorit, local }) {
+export default function ListFavorite({ classes, statusListFavorit, local, showDataText }) {
 
     const dispatch = useDispatch();
-
-    console.log(Object.entries(...Object.values(...local)))
-
-    const showDataText = (temp) => {
-        let toDisplay = {
-            title: temp.title,
-            company: temp.company,
-            type: temp.type,
-            location: temp.location
-        };
-
-        return Object.entries(toDisplay).map(([key, value]) => (
-            <Typography variant="h5"><b style={{ textTransform: 'capitalize' }}>{key}</b> {value}</Typography>
-        ));
-    };
 
     return (
         <div>
@@ -86,4 +71,5 @@ ListFavorite.propTypes = {
     classes: PropTypes.object,
     statusListFavorit: PropTypes.object,
     local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    showDataText: PropTypes.func,
 }

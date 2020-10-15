@@ -57,6 +57,7 @@ exports[`<TabsBlock /> Snapshot TabsBlock 1`] = `
         }
         data={[MockFunction]}
         local={[MockFunction]}
+        showDataText={[Function]}
         statusList={
           <ForwardRef(WithStyles)
             align="center"
@@ -89,6 +90,7 @@ exports[`<TabsBlock /> Snapshot TabsBlock 1`] = `
           }
         }
         local={[MockFunction]}
+        showDataText={[Function]}
         statusListFavorit={
           <ForwardRef(WithStyles)
             align="center"

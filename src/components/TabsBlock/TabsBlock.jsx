@@ -41,6 +41,19 @@ export default function TabsBlock({ setInputValue }) {
         (valueIndexOne === 0 && setValueIndexOne(1)) || (valueIndexOne === 1 && setValueIndexOne(0));
     };
 
+    const showDataText = ({ title, company, type, location }) => {
+        let toDisplay = {
+            title: title,
+            company: company,
+            type: type,
+            location: location
+        };
+
+        return Object.entries(toDisplay).map(([key, value]) => (
+            <Typography variant="h5"><b style={{ textTransform: 'capitalize' }}>{key}</b>: {value}</Typography>
+        ));
+    };
+
     return (
         <div>
             <Paper className={classes.paperTabs} square>
@@ -71,6 +84,7 @@ export default function TabsBlock({ setInputValue }) {
                             data={data}
                             statusList={<Typography variant="h4" align="center">Work list is empty</Typography>}
                             local={local}
+                            showDataText={showDataText}
                         />
                     }
                 </Route>
@@ -80,6 +94,7 @@ export default function TabsBlock({ setInputValue }) {
                             classes={classes}
                             statusListFavorit={<Typography variant="h4" align="center">Work favorites list is empty</Typography>}
                             local={local}
+                            showDataText={showDataText}
                         />
                     }
                 </Route>

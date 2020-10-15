@@ -18,7 +18,7 @@ import { showListLocalStorage } from '../../store/slicesStore/mainSlice';
 
 import { addAndDelLocal, updateEffectLocalStorageStore } from '../../store/slicesStore/middleWareMainSlice';
 
-export default function ListWork({ classes, data, statusList, local }) {;
+export default function ListWork({ classes, data, statusList, local, showDataText }) {;
 
     const dispatch = useDispatch();
 
@@ -58,10 +58,7 @@ export default function ListWork({ classes, data, statusList, local }) {;
 
                             </Grid>
 
-                            <Typography variant="h5"><b>Title:</b> {el.dataDescription.title}</Typography>
-                            <Typography variant="h5"><b>Company:</b> {el.dataDescription.company}</Typography>
-                            <Typography variant="h5"><b>Type:</b> {el.dataDescription.type}</Typography>
-                            <Typography variant="h5"><b>Location:</b> {el.dataDescription.location}</Typography>
+                            { showDataText(el.dataDescription) }
 
                             <ThemeProvider theme={themeTabs}>
                             <CssBaseline/>
@@ -84,4 +81,5 @@ ListWork.propTypes = {
     data: PropTypes.array,
     statusList: PropTypes.object,
     local: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    showDataText: PropTypes.func,
 }
