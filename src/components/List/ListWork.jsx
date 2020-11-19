@@ -27,6 +27,7 @@ export default function ListWork({ classes, data, statusList, local, showDataTex
         updateEffectLocalStorageStore(local, dispatch);
     },[]);
     
+    
     return (
         <div>
             {

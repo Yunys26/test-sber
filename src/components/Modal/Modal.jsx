@@ -14,13 +14,20 @@ export default function ModalS({ open }) {
 
     const dispatch = useDispatch();
     
+    const handleCloseModal = React.useCallback(() => dispatch(openAndCloseModal(false)), [dispatch]);
+    
+    const handleCloseModalButton = React.useCallback(() => {
+        localStorage.clear();
+        dispatch(openAndCloseModal(false));
+    });
+
     return (
         <Modal
             aria-labelledby="spring-modal-title"
             aria-describedby="spring-modal-description"
             className={classes.modal}
             open={open}
-            onClose={() => dispatch(openAndCloseModal(false))}
+            onClose={handleCloseModal}
             closeAfterTransition
             BackdropProps={{timeout: 500}}
         >
@@ -29,15 +36,12 @@ export default function ModalS({ open }) {
                     <h2 id="spring-modal-title">Warning</h2>
                     <p id="spring-modal-description"><b>Maximum limit reached</b></p>
                     <div className={classes.footerButton}>
-                        <Button onClick={() => dispatch(openAndCloseModal(false))}>Ок</Button>
+                        <Button onClick={handleCloseModal}>Ок</Button>
                         <Button 
                             className={classes.buttonLastModal} 
                             variant="outlined" 
                             color="secondary" 
-                            onClick={() => {
-                                localStorage.clear();
-                                dispatch(openAndCloseModal(false));
-                            }}
+                            onClick={handleCloseModalButton}
                         >
                             <b>Delete all favorites</b>
                         </Button>

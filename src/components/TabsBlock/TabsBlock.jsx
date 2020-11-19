@@ -36,6 +36,11 @@ export default function TabsBlock({ setInputValue }) {
 
     const [valueIndexOne, setValueIndexOne] = useState(0);
 
+    const handleClickLinkWork = React.useCallback(() => {
+        dispatch(showListLocalStorage(showLocalStorage()));
+        setInputValue('');
+    });
+
     // Логика работы Tabs
     const tabsIndexOne = () => {
         (valueIndexOne === 0 && setValueIndexOne(1)) || (valueIndexOne === 1 && setValueIndexOne(0));
@@ -59,17 +64,14 @@ export default function TabsBlock({ setInputValue }) {
             <Paper className={classes.paperTabs} square>
                 <Tabs
                     centered
-                    onClick={() => tabsIndexOne()}
+                    onClick={tabsIndexOne}
                     value={valueIndexOne}
                 >
                     <NavLink className={classes.tabNavLink} to="/">
                         <Tab  label="Work" value={0}/>
                     </NavLink>
                     <NavLink 
-                        onClick={() => {
-                            dispatch(showListLocalStorage(showLocalStorage()));
-                            setInputValue('');
-                        }}
+                        onClick={handleClickLinkWork}
                         className={classes.tabNavLink} to="/work"
                     >
                         <Tab label="Work Favorites" value={1}/>

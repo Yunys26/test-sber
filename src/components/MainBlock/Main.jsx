@@ -30,16 +30,19 @@ export default function Main(props) {
     // Проверка input
     const regex = new RegExp('[а-яА-Я]');
 
+    const handleChangeInputValue = React.useCallback((event) => setInputValue(event.target.value));
+    const handleClick = React.useCallback(() => dispatch(responseDataWork(inputValue)));
+    
     return (
         <Box className={classes.mainBlock} boxShadow={4}>
             <Typography variant="h1" align="center">Work<b>I<span className={classes.textN}>n</span></b>Search</Typography>
             <Grid className={classes.searchBlock} container item direction="row" justify="center" alignItems="center" xs={12}>
                 <ThemeProvider theme={themeSearchBlock}>
-                    <Input className="" color="secondary" autoFocus value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="Enter" />
+                    <Input className="" color="secondary" autoFocus value={inputValue} onChange={handleChangeInputValue} placeholder="Enter" />
                 </ThemeProvider>
                 <Button
                     className={classes.serachButton}
-                    onClick={() => dispatch(responseDataWork(inputValue))}
+                    onClick={handleClick}
                     variant="outlined"
                     color="secondary"
                     disabled={(inputValue === '') || regex.test(inputValue)}
