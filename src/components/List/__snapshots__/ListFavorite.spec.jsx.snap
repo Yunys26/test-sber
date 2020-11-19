@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListFavorite /> Snapshot ListFavorite 1`] = `undefined`;
+
+exports[`<ListFavorite /> Snapshot ListFavorite 2`] = `undefined`;

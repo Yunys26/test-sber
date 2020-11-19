@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Modal /> Содержимое <Modal />  Snapshot Modal 1`] = `
+<ForwardRef(Modal)
+  BackdropProps={
+    Object {
+      "timeout": 500,
+    }
+  }
+  aria-describedby="spring-modal-description"
+  aria-labelledby="spring-modal-title"
+  className="makeStyles-modal-1"
+  closeAfterTransition={true}
+  onClose={[Function]}
+  open={true}
+>
+  <ForwardRef(Fade)
+    in={true}
+  >
+    <div
+      className="makeStyles-paper-2"
+    >
+      <h2
+        id="spring-modal-title"
+      >
+        Warning
+      </h2>
+      <p
+        id="spring-modal-description"
+      >
+        <b>
+          Maximum limit reached
+        </b>
+      </p>
+      <div
+        className="makeStyles-footerButton-3"
+      >
+        <WithStyles(ForwardRef(Button))
+          onClick={[Function]}
+        >
+          Ок
+        </WithStyles(ForwardRef(Button))>
+        <WithStyles(ForwardRef(Button))
+          className="makeStyles-buttonLastModal-4"
+          color="secondary"
+          onClick={[Function]}
+          variant="outlined"
+        >
+          <b>
+            Delete all favorites
+          </b>
+        </WithStyles(ForwardRef(Button))>
+      </div>
+    </div>
+  </ForwardRef(Fade)>
+</ForwardRef(Modal)>
+`;

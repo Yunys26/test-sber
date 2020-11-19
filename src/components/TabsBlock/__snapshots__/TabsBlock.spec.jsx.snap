@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabsBlock /> Snapshot TabsBlock 1`] = `
+<div>
+  <WithStyles(ForwardRef(Paper))
+    className="makeStyles-paperTabs-10"
+    square={true}
+  >
+    <WithStyles(ForwardRef(Tabs))
+      centered={true}
+      onClick={[Function]}
+      value={0}
+    >
+      <NavLink
+        className="makeStyles-tabNavLink-11"
+        to="/"
+      >
+        <WithStyles(ForwardRef(Tab))
+          label="Work"
+          value={0}
+        />
+      </NavLink>
+      <NavLink
+        className="makeStyles-tabNavLink-11"
+        onClick={[Function]}
+        to="/work"
+      >
+        <WithStyles(ForwardRef(Tab))
+          label="Work Favorites"
+          value={1}
+        />
+      </NavLink>
+    </WithStyles(ForwardRef(Tabs))>
+  </WithStyles(ForwardRef(Paper))>
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+    >
+      <ListWork
+        classes={
+          Object {
+            "blockContent": "makeStyles-blockContent-6",
+            "footerSearchBlock": "makeStyles-footerSearchBlock-9",
+            "headerSearchBlock": "makeStyles-headerSearchBlock-7",
+            "likeBlack": "makeStyles-likeBlack-4",
+            "likePrimary": "makeStyles-likePrimary-5",
+            "nameCompany": "makeStyles-nameCompany-1",
+            "paperTabs": "makeStyles-paperTabs-10",
+            "statusLoadingText": "makeStyles-statusLoadingText-13",
+            "tabNavLink": "makeStyles-tabNavLink-11",
+            "textTitleTabs": "makeStyles-textTitleTabs-12",
+            "titleSearchBlock": "makeStyles-titleSearchBlock-8",
+            "workBlock": "makeStyles-workBlock-2",
+            "workBlockLogo": "makeStyles-workBlockLogo-3",
+          }
+        }
+        data={[MockFunction]}
+        local={[MockFunction]}
+        showDataText={[Function]}
+        statusList={
+          <ForwardRef(WithStyles)
+            align="center"
+            variant="h4"
+          >
+            Work list is empty
+          </ForwardRef(WithStyles)>
+        }
+      />
+    </Route>
+    <Route
+      path="/work"
+    >
+      <ListFavorite
+        classes={
+          Object {
+            "blockContent": "makeStyles-blockContent-6",
+            "footerSearchBlock": "makeStyles-footerSearchBlock-9",
+            "headerSearchBlock": "makeStyles-headerSearchBlock-7",
+            "likeBlack": "makeStyles-likeBlack-4",
+            "likePrimary": "makeStyles-likePrimary-5",
+            "nameCompany": "makeStyles-nameCompany-1",
+            "paperTabs": "makeStyles-paperTabs-10",
+            "statusLoadingText": "makeStyles-statusLoadingText-13",
+            "tabNavLink": "makeStyles-tabNavLink-11",
+            "textTitleTabs": "makeStyles-textTitleTabs-12",
+            "titleSearchBlock": "makeStyles-titleSearchBlock-8",
+            "workBlock": "makeStyles-workBlock-2",
+            "workBlockLogo": "makeStyles-workBlockLogo-3",
+          }
+        }
+        local={[MockFunction]}
+        showDataText={[Function]}
+        statusListFavorit={
+          <ForwardRef(WithStyles)
+            align="center"
+            variant="h4"
+          >
+            Work favorites list is empty
+          </ForwardRef(WithStyles)>
+        }
+      />
+    </Route>
+  </Switch>
+  <ModalS
+    open={[MockFunction]}
+  />
+</div>
+`;

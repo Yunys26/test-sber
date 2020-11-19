@@ -1,14 +1,21 @@
-import { createStore } from 'redux';
+// Libs
+import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
+import mainSlice from './slicesStore/mainSlice';
 
-function data (state = 0, action) {
-    switch (action.type) {
-        case GETDATA:
-            return state + 1;
-        case LIKEWORK:
-            return state - 1;
-    }
-}
+// Создание главного редьюсера
+const rootReducer = combineReducers({
+    main: mainSlice,
+});
 
-let store = createStore(data);
+// Настройка хранилища
+const middleware = getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+    thunk: true,
+});
 
-store.subscribe( () => console.log(store.getState()))
+// Хранилище
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware,
+});
